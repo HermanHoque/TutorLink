@@ -57,7 +57,7 @@
   <!-- Seção de Categorias -->
   <section class="categories">
     <div class="container">
-      <h2>Encontre um Tutor para de ensinar sobre...</h2>
+      <h2>Encontre um Tutor para te ensinar sobre...</h2>
       <div class="categories-grid">
         <div class="category-item shadow p-3 mb-5 rounded">
           <h3>Programação</h3>
