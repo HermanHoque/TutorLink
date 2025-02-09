@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="669"
+   height="686"
+   viewBox="0 0 669 686"
+   sodipodi:docname="coca.png"
+   inkscape:export-filename="TutorLinkLogo.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showborder="true">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="669"
+       height="686"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g1">
+    <rect
+       style="fill:#157347;fill-opacity:1;stroke:#000000;stroke-width:0.990152;paint-order:stroke fill markers"
+       id="rect2"
+       width="555.86243"
+       height="556.96344"
+       x="199.25473"
+       y="-260.04071"
+       ry="147.23001"
+       transform="matrix(0.72625043,0.68743023,-0.66922774,0.74305736,0,0)" />
+    <text
+       xml:space="preserve"
+       style="font-size:264.966px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;white-space:pre;inline-size:211.723;fill:#333333;fill-opacity:1;stroke:#000000;stroke-width:0.68042;paint-order:stroke fill markers"
+       x="131.31651"
+       y="646.21429"
+       id="text2"
+       transform="matrix(1.3409195,0,0,1.5787479,-63.544777,-532.47199)"><tspan
+         x="131.31651"
+         y="646.21429"
+         id="tspan3"><tspan
+           style="font-family:'Edwardian Script ITC';-inkscape-font-specification:'Edwardian Script ITC'"
+           id="tspan1">T</tspan></tspan></text>
+  </g>
+</svg>

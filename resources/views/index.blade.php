@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TutorLink</title>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+  <link rel="shortcut icon" href="{{ asset('img/TutorLinkLogo.svg') }}" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
 
@@ -19,7 +20,9 @@
   <header class="header">
     <nav class="navbar navbar-expand-lg container">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">TutorLink</a>
+        <a class="navbar-brand" href="#">
+          <img src="{{ asset('img/TutorLinkLogo.svg') }}" alt="sem logo" style="width: 50px; height: 40px;">
+          TutorLink</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -32,7 +35,7 @@
             </form>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><div class="btn btn-success">Login</div></a>
+            <a class="nav-link" href="#"><div class="btn btn-success" style="color: #333333">Login</div></a>
           </li>
         </ul>
 
