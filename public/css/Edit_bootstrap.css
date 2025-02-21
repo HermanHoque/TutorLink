@@ -1,0 +1,6 @@
+/* Alterar a cor do foco para vermelho */
+.form-control:focus {
+    border-color: #3C4049; /* Cor da borda */
+    box-shadow: 0 0 0 0.2rem rgba(60, 64, 73, 0.5); /* Cor da sombra */
+    outline: none; /* Remove o outline padrão */
+}
