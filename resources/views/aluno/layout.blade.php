@@ -74,7 +74,7 @@
     </style>
 </head>
 <body>
-    <div class="sidebar">
+    <div class="sidebar sticky-top">
         <a href="{{ route('alunoHome') }}">
             <img src="{{ asset('img/TutorLinkLogo.svg') }}" alt="" style="width: 30px; height: 40px;">
             <span> TutorLink</span>
