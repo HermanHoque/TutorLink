@@ -71,10 +71,62 @@
         background: #3C4049;
         color: white 
     }
+
+    .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+     /* Menu inferior separado do conteúdo principal */
+     .bottom-menu {
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background: #fff;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .bottom-menu a {
+            text-decoration: none;
+            color: #333;
+            text-align: center;
+            flex: 1;
+        }
+
+        .bottom-menu a i {
+            font-size: 24px;
+            display: block;
+        }
+
+        .bottom-menu a span {
+            font-size: 12px;
+        }
+
+        @media (min-width: 769px) {
+            .bottom-menu {
+                display: none;
+                
+            }
+
+        }
+
+        @media (max-width: 750px){
+            .main-content {
+                flex-grow: 1;
+                padding: 10px;
+            }
+
+        }
+
+
     </style>
 </head>
 <body>
-    <div class="sidebar sticky-top">
+    <div class="sidebar d-none d-md-flex sticky-top">
         <a href="{{ route('alunoHome') }}">
             <img src="{{ asset('img/TutorLinkLogo.svg') }}" alt="" style="width: 30px; height: 40px;">
             <span> TutorLink</span>
@@ -85,11 +137,20 @@
         <a id="op" href="{{ route('alunoMsg') }}"><i class="bi bi-chat-dots-fill"></i><span> Mensagens</span></a>
         <br><br>
         
-        <a id="op" href="#"><i class="bi bi-box-arrow-right"></i><span> Sair</span></a>
+        <a id="op" href="#"><i class="bi bi-box-arrow-right"></i><span>Sair</span></a>
     </div>
 
-    <div style="padding-left: 20px; padding-top: 20px; width: 80%">
+    <div class="main-content">
         @yield('layout_user')
+        <br><br><br>
+    </div>
+
+    <div class="bottom-menu d-md-none">
+        <a href="{{ route('alunoHome') }}"><i class="bi bi-house-fill"></i><span>Home</span></a>
+        <a href="{{ route('alunoPerfil') }}"><i class="bi bi-person-fill"></i><span>Perfil</span></a>
+        <a href="{{ route('alunoNotifi') }}"><i class="bi bi-bell-fill"></i><span>Notificações</span></a>
+        <a href="{{ route('alunoMsg') }}"><i class="bi bi-chat-dots-fill"></i><span>Mensagens</span></a>
+        <a href="#"><i class="bi bi-box-arrow-right"></i><span>Sair</span></a>
     </div>
 
 

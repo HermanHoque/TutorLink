@@ -16,7 +16,7 @@
               <span class="input-group-text" id="buscaid" style="background: #3C4049">
                   <i class="bi bi-search"></i>
               </span>
-              <input type="text" class="form-control" placeholder="Pesquisar..." aria-label="Username" aria-describedby="addon-wrapping">
+              <input type="text" class="form-control" placeholder="Pesquisar Tutor..." aria-label="Username" aria-describedby="addon-wrapping">
               <div class="dropdown" >
                   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
                   style="background: #3C4049; margin-left: 10px;">
