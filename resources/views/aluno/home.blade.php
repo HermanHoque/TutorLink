@@ -28,9 +28,10 @@
                         <li><a class="dropdown-item" href="#">Pesquisar por nome</a></li>
                         <li><a class="dropdown-item" href="#">Pesquisar por especialidade</a></li>
                     </ul>
-                </div>
+                </div> 
             </div>
         </form>
+        
 
         <div style="margin-top: 20px;">
           <ul class="nav nav-tabs" id="navTabs">
