@@ -9,7 +9,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    
     <link rel="stylesheet" href="{{ asset('css/Edit_bootstrap.css') }}">
     <style>
         body {
@@ -17,6 +17,17 @@
             font-family: Arial, sans-serif;
             display: flex;
         }
+
+        #tracoHeader{
+            
+            border: none; /* Remove a borda padrão */
+            height: 4px; /* Define a altura da linha */
+            background: #157347; /* Cor de fundo */
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 1); /* Adiciona sombra */
+            border-radius: 5px;
+        }
+
+        /* menu lateral */
         .sidebar {
             width: 70px;
             height: 100vh;
@@ -67,14 +78,9 @@
             opacity: 1;
         }
 
-    #btnH1{
-        background: #3C4049;
-        color: white 
-    }
-
-    .main-content {
-            flex-grow: 1;
-            padding: 20px;
+        .main-content {
+                flex-grow: 1;
+                padding: 20px;
         }
 
      /* Menu inferior separado do conteúdo principal */
@@ -120,7 +126,43 @@
                 padding: 10px;
             }
 
+            #title{
+                padding-top: 10px;
+            }
+
+            #tracoHeader{
+                background: #333;
+
+            }
+
         }
+
+    
+    /* estilo da pagina home_aluno */
+    #card-body {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .card-footer {
+        position: sticky;
+        bottom: 0;
+        background: white;
+        padding: 10px;
+    }
+
+    
+    .profile-pic { /* tamanho da foto perfil */
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    #btnH1{
+        background: #3C4049;
+        color: white 
+    }
 
 
     </style>
@@ -154,6 +196,17 @@
     </div>
 
 
+    <script>
+        document.querySelectorAll("#navTabs .nav-link").forEach(link => {
+          link.addEventListener("click", function() {
+            // Remove a classe 'active' de todos os links
+            document.querySelectorAll("#navTabs .nav-link").forEach(el => el.classList.remove("active"));
+            
+            // Adiciona a classe 'active' apenas ao link clicado
+            this.classList.add("active");
+          });
+        });
+      </script>
     
 </body>
 </html>
