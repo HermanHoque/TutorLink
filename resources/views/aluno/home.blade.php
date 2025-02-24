@@ -41,7 +41,7 @@
               <a class="nav-link" href="#" style="color: #3C4049">Top Avaliações</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" style="color: #3C4049">Em Destaque</a>
+              <a class="nav-link" href="#" style="color: #3C4049">Destaques</a>
             </li>
           </ul>
         </div>
