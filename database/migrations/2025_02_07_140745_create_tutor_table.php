@@ -19,9 +19,8 @@ return new class extends Migration
             $table->integer("whatsapp")->nullable(false);
             $table->string("nivel_academico", 40)->nullable();
             $table->string("descricao")->nullable(false);
-            $table->string("especialidade")->nullable(false);
             $table->string("estado", 10)->nullable(false)->default("on");
-            $table->string("foto_tutor")->nullable();
+            $table->string("foto_tutor")->nullable(false);
             /* criar chave estrangeira */
             $table->unsignedBigInteger("id_user");
             $table->foreign("id_user")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
