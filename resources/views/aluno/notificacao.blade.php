@@ -30,7 +30,7 @@
             <img src="{{ asset('img/23.jpg') }}" class="profile-pic" alt="Imagem">
             <div>
                 <h5>Você foi respondido por Eren Yeger</h5>
-                <p>Sua Solicitação de aula particular em Matemática foi aceite.</p>
+                <p>Sua Solicitação de aula particular em Progamação WEB foi aceite.</p>
                 <div class="row d-grid gap-2" style="width: 300px; margin-top: 5px;">
                     <div class="col">
                         <a href="#" class="btn btn-outline-secondary btn-sm" style="margin-right: 5px;">

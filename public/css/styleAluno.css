@@ -98,6 +98,102 @@ body {
     font-size: 12px;
 }
 
+/* estilo da pagina home_aluno */
+#card-body {
+    max-height: 300px;
+    overflow-y: auto;
+    }
+    
+    .card-footer {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 10px;
+    }
+    
+    #btnH1{
+    background: #3C4049;
+    color: white 
+    }
+    
+    /* tamanho da foto perfil */
+    .profile-pic { 
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        }
+    
+    
+    /* estilo pagina notificações */
+    .cardNotifi {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .cardNotifi img { /* tamanho da foto de perfil notifi */
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 15px;
+    }
+    .cardNotifi h5 {
+        margin: 0;
+        font-size: 16px;
+    }
+    .cardNotifi p {
+        font-size: 14px;
+        color: #666;
+        margin: 5px 0;
+    }
+    
+    
+    /* perfil do aluno estilo */
+    #cardPerfil {
+        max-width: 700px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .sessao_perfil {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .perfil_foto {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    .op_user {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    .info_user {
+        flex: 1;
+    }
+    
+    .estatos {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    
+/* responsividade */
 @media (min-width: 769px) {
     .bottom-menu {
         display: none;
@@ -124,99 +220,3 @@ body {
 }
 
 
-/* estilo da pagina home_aluno */
-#card-body {
-max-height: 300px;
-overflow-y: auto;
-}
-
-.card-footer {
-position: sticky;
-bottom: 0;
-background: white;
-padding: 10px;
-}
-
-#btnH1{
-background: #3C4049;
-color: white 
-}
-
-/* tamanho da foto perfil */
-.profile-pic { 
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    }
-
-
-/* estilo pagina notificações */
-.cardNotifi {
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-.cardNotifi img { /* tamanho da foto de perfil notifi */
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 15px;
-}
-.cardNotifi h5 {
-    margin: 0;
-    font-size: 16px;
-}
-.cardNotifi p {
-    font-size: 14px;
-    color: #666;
-    margin: 5px 0;
-}
-
-
-/* perfil do aluno estilo */
-#cardPerfil {
-    max-width: 700px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-.sessao_perfil {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.perfil_foto {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.op_user {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.info_user {
-    flex: 1;
-}
-
-.estatos {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-/* .estatos div {
-    text-align: right;
-} */

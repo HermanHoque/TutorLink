@@ -15,7 +15,7 @@
         <div class="sessao_perfil">
             <img src="{{ asset('img/goj4.jpg') }}" alt="Foto de perfil" class="perfil_foto">
             <div class="op_user">
-                <button class="btn" style="background-color: #157347; color: white">
+                <button class="btn btn-sm" style="background-color: #157347; color: white">
                     <i class="bi bi-pencil-square"></i> Editar perfil
                 </button>
             </div>
@@ -24,15 +24,15 @@
             <h4>Satoru Gojo</h4>
             <hr>
             <p style="color: #007bff;">
-                <i class="bi bi-telephone"></i> 934 816 063
+                <i class="bi bi-telephone"> -</i> 934 816 063
             </p>
 
             <p style="color: #007bff;">
-                <i class="bi bi-mortarboard"></i> Ensino médio
+                <i class="bi bi-mortarboard"> -</i> Ensino médio
             </p>
 
             <p style="color: #007bff;">
-                <i class="bi bi-file-text"></i> Sobre você: Satoru Gojo é um dos personagens mais populares de Jujutsu Kaisen. Ele é um feiticeiro de jujutsu extremamente poderoso...
+                <i class="bi bi-file-text"> -</i> Sobre você: Satoru Gojo é um dos personagens mais populares de Jujutsu Kaisen. Ele é um feiticeiro de jujutsu extremamente poderoso...
             </p>
             <div class="estatos">
                 <div style="width: 200px;">
@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             {{-- sobre a aula --}}
-                            <strong>Tutor:</strong> Uchiha Madara <br>
+                            <strong>Tutor:</strong>  Eren Yeger <br>
                             <div style="padding-bottom: 5px"></div>
                             <strong>Telefone:</strong> 934 999 888 <br>
                             <div style="padding-bottom: 5px"></div>
