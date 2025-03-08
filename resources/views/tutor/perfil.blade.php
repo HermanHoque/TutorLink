@@ -74,6 +74,7 @@
             </div>
         </div>
     </div>
+    {{-- perfis de especialidades --}}
     <br>
     <h3><strong>Seus Perfis</strong></h3>
     <hr>
@@ -91,18 +92,20 @@
                                 </div>
                             </div>
                             {{-- sobre a aula --}}
-                            <strong>Tutor:</strong>  Eren Yeger <br>
+                            <strong>Tipo de aula:</strong>  Particular <br>
                             <div style="padding-bottom: 5px"></div>
-                            <strong>Telefone:</strong> 934 999 888 <br>
+                            <strong>Nº de alunos:</strong> 1 <br>
                             <div style="padding-bottom: 5px"></div>
-                            <strong>Tipo de aula:</strong> Particular <br>
+                            <strong>Custo:</strong> 0 <br>
                             <div style="padding-bottom: 5px"></div>
                             <p class="text-muted small"> é o processo de desenvolvimento de sites e aplicações acessíveis por meio de navegadores. Ela envolve tecnologias como HTML (estrutura da página), CSS (estilização) e JavaScript (interatividade). No backend, linguagens como PHP, Python, Node.js e Ruby são usadas para processar dados e gerenciar bancos de dados.</p>
                         </div>
                     
                         <div class="card-footer d-flex gap-2">
-                            <a href="#" class="btn btn-outline-secondary w-50">Avaliar</a>
-                            <a href="#" class="btn btn-danger w-50">Terminar</a>
+                            <a href="#" class="btn btn-outline-secondary w-50">Ver alunos</a>
+                            <a href="#" class="btn btn-danger w-50">
+                                <i class="bi bi-x-circle"></i> Terminar
+                            </a>
                         </div>
                     </div>
                 </div>

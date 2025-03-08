@@ -45,7 +45,8 @@
     </div>
     <br>
     <div>
-        <h3>Suas Aulas</h3>
+        <h3><strong>Suas Aulas</strong></h3>
+        <hr>
 
         <div class="row align-items-center">
             @for ($i = 1; $i <= 3; $i++)
@@ -65,6 +66,8 @@
                             <strong>Telefone:</strong> 934 999 888 <br>
                             <div style="padding-bottom: 5px"></div>
                             <strong>Tipo de aula:</strong> Particular <br>
+                            <div style="padding-bottom: 5px"></div>
+                            <strong>Custo:</strong> 0 <br>
                             <div style="padding-bottom: 5px"></div>
                             <p class="text-muted small"> é o processo de desenvolvimento de sites e aplicações acessíveis por meio de navegadores. Ela envolve tecnologias como HTML (estrutura da página), CSS (estilização) e JavaScript (interatividade). No backend, linguagens como PHP, Python, Node.js e Ruby são usadas para processar dados e gerenciar bancos de dados.</p>
                         </div>

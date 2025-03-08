@@ -152,6 +152,32 @@ body {
         margin: 5px 0;
     }
 
+
+/*card de informações da pagina home_tutor*/
+.estilo-card {
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    min-width: 200px;
+    text-align: center;
+}
+.card_1 { background: linear-gradient(135deg, #6a11cb, #2575fc); }
+.card_2 { background: linear-gradient(135deg, #ff8c00, #ff0080); }
+.card_3 { background: linear-gradient(135deg, #00c853, #b2ff59); }
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50% 50% 0 0;
+}
+
 /* responsividade */
 @media (min-width: 769px) {
     .bottom-menu {

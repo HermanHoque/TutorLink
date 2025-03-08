@@ -3,7 +3,6 @@
 
 @section('layout_user')
 
-    <div class="">
       <div id="cabecalho">
         <div class="row" id="title">
             <div class="col" style="font-size: 20pt">
@@ -50,9 +49,10 @@
       </div>
 
       {{-- cards linha--}}
-      <div class="container">
-        @for ($i = 0; $i <= 1; $i++)
+  <div class="container">
+        
           <div class="row align-items-center">
+            @for ($i = 1; $i <= 6; $i++)
             {{-- cards --}}
             <div class="col" style="padding-top: 20px">
               <div class="container">
@@ -64,29 +64,26 @@
                           alt="Foto de perfil" class="profile-pic me-3">
                           <div>{{-- info tutor --}}
                               <h5 class="mb-0">Madara Uchiha</h5>
-                              <small class="text-muted">Konoha</small><br>
-                              <small class="text-muted">Responde em 7h e 19 min</small>
-                              <p class="text-primary fw-bold mb-0">1ª hora grátis</p>
+                              <small class="text-muted">
+                                <i class="bi bi-geo-alt"> -</i> Konoha
+                              </small>
                           </div>
                       </div>
                       {{-- medias e avaliações --}}
-                      <div class="d-flex justify-content-between mt-3">
-                          <div>
-                              <strong>⭐ 10/10</strong>
+                      <div class="d-flex mt-3">
+                          <div style="padding: 10px;">
+                              <strong><i class="bi bi-star-fill text-warning"></i> 10/10</strong>
                               <p class="text-muted small">nota média</p>
                           </div>
-                          <div>
-                              <strong>94</strong>
+                          <div style="padding: 10px; text-align: center">
+                              <strong><i class="bi bi-graph-up"></i> 94</strong>
                               <p class="text-muted small">avaliações</p>
                           </div>
-                          <div>
-                              <strong>R$ 120</strong>
-                              <p class="text-muted small">por hora</p>
-                          </div>
+                          
                       </div>
                       {{-- sobre o tutor --}}
                       <p>
-                        <strong>Especialidades:</strong> Inglês para Exames Cambridge, Inglês para Negócios
+                        <strong>Especialidades:</strong> Inglês, Matemática, Física
                       </p>
                       <p>
                         <strong>Nivél Académico:</strong> Hokage das Sombras
@@ -94,111 +91,19 @@
                       <p class="text-muted small">Madara Uchiha é um dos vilões mais poderosos e carismáticos de Naruto. Ele foi um dos fundadores da Vila Oculta da Folha (Konoha), ao lado de Hashirama Senju, mas sua visão distorcida de paz e justiça o levou a se tornar um antagonista.</p>
                   </div>
                     <div class="card-footer d-flex gap-2">
-                      <a href="#" class="btn w-50"  id="btnH1">Contatar</a>
+                      <a href="#" class="btn w-50"  id="btnH1">Detalhes</a>
                       <a href="#" class="btn btn-outline-secondary w-50">WhatsApp</a>
                     </div>
                 </div>
+              </div>
             </div>
-            </div>
-
-            <div class="col" style="padding-top: 20px">
-              <div class="container">
-                <div class="card shadow-sm p-3">
-                  <div id="card-body">
-                    {{-- foto perfil e info --}}
-                      <div class="d-flex align-items-center">
-                          <img src="{{ asset('img/23.jpg') }}"
-                          alt="Foto de perfil" class="profile-pic me-3">
-                          <div>{{-- info tutor --}}
-                              <h5 class="mb-0">Eren Yeager</h5>
-                              <small class="text-muted">Konoha</small><br>
-                              <small class="text-muted">Responde em 7h e 19 min</small>
-                              <p class="text-primary fw-bold mb-0">1ª hora grátis</p>
-                          </div>
-                      </div>
-                      {{-- medias e avaliações --}}
-                      <div class="d-flex justify-content-between mt-3">
-                          <div>
-                              <strong>⭐ 10/10</strong>
-                              <p class="text-muted small">nota média</p>
-                          </div>
-                          <div>
-                              <strong>94</strong>
-                              <p class="text-muted small">avaliações</p>
-                          </div>
-                          <div>
-                              <strong>R$ 120</strong>
-                              <p class="text-muted small">por hora</p>
-                          </div>
-                      </div>
-                      {{-- sobre o tutor --}}
-                      <p>
-                        <strong>Especialidades:</strong> Inglês para Exames Cambridge, Inglês para Negócios
-                      </p>
-                      <p>
-                        <strong>Nivél Académico:</strong> Hokage das Sombras
-                      </p>
-                      <p class="text-muted small">Eren Yeager é o protagonista de Attack on Titan (Shingeki no Kyojin), mas sua jornada é repleta de ambiguidades morais. No início, ele é motivado por um desejo de vingança contra os Titãs após testemunhar a destruição de sua cidade e a morte de sua mãe. No entanto, ao longo da série, Eren se transforma em uma figura complexa e controversa.</p>
-                  </div>
-                    <div class="card-footer d-flex gap-2">
-                      <a href="#" class="btn w-50 text-center"  id="btnH1">Contatar</a>
-                      <a href="#" class="btn btn-outline-secondary">WhatsApp</a>
-                    </div>
-                </div>
-            </div>
-            </div> 
-             
-            <div class="col" style="padding-top: 20px">
-              <div class="container">
-                <div class="card shadow-sm p-3">
-                  <div id="card-body">
-                    {{-- foto perfil e info --}}
-                      <div class="d-flex align-items-center">
-                          <img src="{{ asset('img/goj4.jpg') }}"
-                          alt="Foto de perfil" class="profile-pic me-3">
-                          <div>{{-- info tutor --}}
-                              <h5 class="mb-0">Satoru Gojo</h5>
-                              <small class="text-muted">Konoha</small><br>
-                              <small class="text-muted">Responde em 7h e 19 min</small>
-                              <p class="text-primary fw-bold mb-0">1ª hora grátis</p>
-                          </div>
-                      </div>
-                      {{-- medias e avaliações --}}
-                      <div class="d-flex justify-content-between mt-3">
-                          <div>
-                              <strong>⭐ 10/10</strong>
-                              <p class="text-muted small">nota média</p>
-                          </div>
-                          <div>
-                              <strong>94</strong>
-                              <p class="text-muted small">avaliações</p>
-                          </div>
-                          <div>
-                              <strong>R$ 120</strong>
-                              <p class="text-muted small">por hora</p>
-                          </div>
-                      </div>
-                      {{-- sobre o tutor --}}
-                      <p>
-                        <strong>Especialidades:</strong> Inglês para Exames Cambridge, Inglês para Negócios
-                      </p>
-                      <p>
-                        <strong>Nivél Académico:</strong> Hokage das Sombras
-                      </p>
-                      <p class="text-muted small">Satoru Gojo é um dos personagens mais populares de Jujutsu Kaisen. Ele é um feiticeiro de jujutsu extremamente poderoso, conhecido por ser o mais forte de seu mundo. Gojo é carismático, confiante e muitas vezes brincalhão</p>
-                  </div>
-                    <div class="card-footer d-flex gap-2">
-                      <a href="#" class="btn w-50"  id="btnH1">Contatar</a>
-                      <a href="#" class="btn btn-outline-secondary w-50">WhatsApp</a>
-                    </div>
-                </div>
-            </div>
-            </div>
-          </div>
-        @endfor
-      </div>
-      <br>
+            @endfor
+        </div>
+        
+  </div>
+  
+  
       
-    </div>
+   
    
 @endsection
