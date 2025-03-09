@@ -64,7 +64,7 @@
                     <input name="num_aluno" type="number" class="form-control" value="2" aria-label="First name" min="2">
 
                     <label class="form-label"><strong>Custo*</strong></label>
-                    <input name="custo" type="number" class="form-control" placeholder="Exemplo: 2000" aria-label="custo" value="0" required>
+                    <input name="custo" type="text" class="form-control" placeholder="Exemplo: 2000Kz" aria-label="custo" value="0" required>
 
                     <label class="form-label"><strong>Descrição*</strong></label>
                     <input name="descricao" type="text" class="form-control" placeholder="Fala sobre a especialidade" aria-label="custo">

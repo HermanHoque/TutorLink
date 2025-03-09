@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacto', function (Blueprint $table) {
-            $table->id();
-            $table->string("estado", 10)->nullable(false)->default("não aceite");
+        Schema::create('solicitacao', function (Blueprint $table) {
+            $table->string("estado", 10)->nullable()->default("em espera");
 
-            $table->unsignedBigInteger("id_tutor");
-            $table->foreign("id_tutor")->references("id")->on("tutor")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger("id_perfil_especialidade");
+            $table->foreign("id_perfil_especialidade")->references("id")->on("perfil_especialidade")->onDelete("cascade")->onUpdate("cascade");
 
             $table->unsignedBigInteger("id_aluno");
             $table->foreign("id_aluno")->references("id")->on("aluno")->onDelete("cascade")->onUpdate("cascade");

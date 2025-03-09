@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tutor_especialidade', function (Blueprint $table) {
+        Schema::create('perfil_especialidade', function (Blueprint $table) {
+            $table->id();
+            $table->string("tipo", 10)->nullable();
+            $table->string("custo", 40)->nullable()->default("0");
+            $table->integer("num_aluno")->nullable()->default(1);
+            $table->string("descricao", 100)->nullable(false);
 
-            $table->unsignedBigInteger("id_tutor");
             $table->unsignedBigInteger("id_especialidade");
-
-            $table->foreign("id_tutor")->references("id")->on("tutor")->onDelete("cascade")->onUpdate("cascade");
-            
             $table->foreign("id_especialidade")->references("id")->on("especialidade")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tutor_especialidade');
+        Schema::dropIfExists('perfil_especialidade');
     }
 };
