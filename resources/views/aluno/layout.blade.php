@@ -41,7 +41,7 @@
         <a href="{{ route('alunoPerfil') }}" class=""><i class="bi bi-person-fill"></i><span>Perfil</span></a>
         <a href="{{ route('alunoNotifi') }}" class=""><i class="bi bi-bell-fill"></i><span>Notificações</span></a>
         <a href="{{ route('alunoMsg') }}" class=""><i class="bi bi-chat-dots-fill"></i><span>Mensagens</span></a>
-        <a href="#"><i class="bi bi-box-arrow-right-fill"></i><span>Sair</span></a>
+        <a href="#"><i class="bi bi-box-arrow-right"></i><span>Sair</span></a>
     </div>
 
 

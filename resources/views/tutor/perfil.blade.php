@@ -67,7 +67,7 @@
                     <input name="custo" type="text" class="form-control" placeholder="Exemplo: 2000Kz" aria-label="custo" value="0" required>
 
                     <label class="form-label"><strong>Descrição*</strong></label>
-                    <input name="descricao" type="text" class="form-control" placeholder="Fala sobre a especialidade" aria-label="custo">
+                    <input name="descricao" type="text" class="form-control" placeholder="Fala sobre a aula" aria-label="custo">
 
                     <button class="btn btn-dark mt-3" type="submit">Criar</button>
                 </form>
@@ -76,8 +76,16 @@
     </div>
     {{-- perfis de especialidades --}}
     <br>
-    <h3><strong>Seus Perfis</strong></h3>
-    <hr>
+     {{-- segundo cabeçalho --}}
+     <div id="cabecalho">
+        <div class="row" id="title">
+            <div class="col" style="font-size: 20pt">
+                <i class="bi bi-easel"></i> 
+                <strong>Seus perfis</strong>
+            </div>
+        </div>
+            <hr id="tracoHeader">   
+    </div>
 
         <div class="row align-items-center">
             @for ($i = 1; $i <= 3; $i++)

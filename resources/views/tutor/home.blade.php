@@ -38,8 +38,16 @@
 
     {{-- perfis de especialidades --}}
     <br>
-    <h3><strong>Seus Perfis</strong></h3>
-    <hr>
+    {{-- segundo cabeçalho --}}
+    <div id="cabecalho">
+        <div class="row" id="title">
+            <div class="col" style="font-size: 20pt">
+                <i class="bi bi-easel"></i> 
+                <strong>Seus perfis</strong>
+            </div>
+        </div>
+            <hr id="tracoHeader">   
+    </div>
 
         <div class="row align-items-center">
             @for ($i = 1; $i <= 3; $i++)

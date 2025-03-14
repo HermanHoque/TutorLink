@@ -45,8 +45,16 @@
     </div>
     <br>
     <div>
-        <h3><strong>Suas Aulas</strong></h3>
-        <hr>
+        {{-- segundo cabeçalho --}}
+        <div id="cabecalho">
+            <div class="row" id="title">
+                <div class="col" style="font-size: 20pt">
+                    <i class="bi bi-book-half"></i> 
+                    <strong>Suas aulas</strong>
+                </div>
+            </div>
+                <hr id="tracoHeader">   
+        </div>
 
         <div class="row align-items-center">
             @for ($i = 1; $i <= 3; $i++)
