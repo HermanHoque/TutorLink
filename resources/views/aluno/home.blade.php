@@ -91,13 +91,13 @@
                       <p class="text-muted small">Madara Uchiha é um dos vilões mais poderosos e carismáticos de Naruto. Ele foi um dos fundadores da Vila Oculta da Folha (Konoha), ao lado de Hashirama Senju, mas sua visão distorcida de paz e justiça o levou a se tornar um antagonista.</p>
                   </div>
                     <div class="card-footer d-flex gap-2">
-                      <a href="#" class="btn w-50"  id="btnH1">Detalhes</a>
+                      <a href="{{ route('detalhes') }}" class="btn w-50"  id="btnH1">Detalhes</a>
                       <a href="#" class="btn btn-outline-secondary w-50">WhatsApp</a>
                     </div>
                 </div>
               </div>
             </div>
-            @endfor
+            @endfor 
         </div>
         
   </div>

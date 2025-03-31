@@ -14,7 +14,7 @@
   <!-- Se quiser usar algum ícone, por exemplo Font Awesome: -->
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" /> -->
 </head>
-<body>
+<body> 
 
   <!-- Header -->
   <header class="header">
@@ -35,7 +35,7 @@
             </form>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><div class="btn btn-success" style="color: #333333">Login</div></a>
+            <a class="nav-link" href="{{ route('login') }}"><div class="btn btn-success" style="color: #333333">Login</div></a>
           </li>
         </ul>
 
