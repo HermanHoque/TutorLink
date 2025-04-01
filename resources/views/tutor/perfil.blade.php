@@ -57,7 +57,7 @@
                     <label class="form-label"><strong>Escolhe o Tipo de Aula*</strong></label>
                     <select class="form-select mb-3" name="tipo">
                         <option value="1" selected>Coletiva</option>
-                        <option value="2">Particula</option>
+                        <option value="2">Particular</option>
                     </select>
 
                     <label class="form-label"><strong>Nº de Alunos (para aula coletiva)*</strong></label>
@@ -122,4 +122,28 @@
     </div>
 
 </div>
+<script>
+    /*
+    * Uso do 'strict mode' nas funcões imediatas para que possamos ter  
+    * um código limpo.
+    */
+    (() => {
+        'use strict';
+
+        // Buscando os elementos DOM
+        const tipo = document.getElementsByName("tipo")[0];
+        const num_aluno = document.getElementsByName("num_aluno")[0];
+
+        // Verificando se o tipo de aula é 'particular' ou coletiva
+        tipo.addEventListener('change', () => {
+            if (tipo.value === '2'){
+                num_aluno.value = '1';
+                num_aluno.setAttribute('disabled', '');
+            }else{
+                num_aluno.attributes.removeNamedItem('disabled');
+            }
+        });
+        
+    })();
+</script>
 @endsection
