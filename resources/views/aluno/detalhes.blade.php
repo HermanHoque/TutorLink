@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="info_user">
-                <h4>Satoru Gojo</h4>
+                <h4>Eren Yeager</h4>
                 <hr>
                         <p style="color: #007bff;">
                             <i class="bi bi-mortarboard"> -</i> Ensino Superior

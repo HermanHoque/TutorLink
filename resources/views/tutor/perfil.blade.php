@@ -140,6 +140,7 @@
                 num_aluno.value = '1';
                 num_aluno.setAttribute('disabled', '');
             }else{
+                num_aluno.value = '2'
                 num_aluno.attributes.removeNamedItem('disabled');
             }
         });

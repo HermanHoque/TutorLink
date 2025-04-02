@@ -14,13 +14,15 @@
         {{-- formulario de pesquisa --}}
         <form action="" method="get">
             <div class="input-group flex-nowrap">
-                <span class="input-group-text" id="buscaid" style="background: #3C4049">
+
+                <span class="input-group-text" id="buscaid" style="background: #3C4049; color: white;">
                     <i class="bi bi-search"></i>
                 </span>
+
                 <input type="text" class="form-control" placeholder="Pesquisar Tutor..." aria-label="Username" aria-describedby="addon-wrapping">
+
                 <div class="dropdown" >
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                    style="background: #3C4049; margin-left: 10px;">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: #3C4049; margin-left: 10px; color: white;">
                         <i class="bi bi-filter"></i> Filtrar
                     </button>
                     <ul class="dropdown-menu">
