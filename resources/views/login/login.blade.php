@@ -4,7 +4,7 @@
 	<title>Logar</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	<!--===============================================================================================-->	 
 	<link rel="icon" type="image/png" href="{{ asset('img/TutorLinkLogo.svg') }}"/>
@@ -21,8 +21,8 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form">
 					
-					<span class="login100-form-title p-b-48" style="height: 80px;">
-						<img src="{{ asset('img/TutorLinkLogo.png') }}" alt="" style="width: 115px; height: 90px;"> 
+					<span class="login100-form-title p-b-48" style="height: 95px;">
+						<img src="{{ asset('img/TutorLinkLogo.svg') }}" alt="" style="width: 115px; height: 90px;"> 
 					</span>
 					<span class="login100-form-title p-b-26">
 						TutorLink
