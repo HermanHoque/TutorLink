@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Avaliacao extends Model
+class Solicitacao extends Model
 {
 
     protected $fillable =[
-        "nota",
-        "id_tutor",
+        "estado",
+        "id_perfil_especialidade",
         "id_aluno"
     ];
-
-    protected $table = "avaliacao";
+    
+    protected $table = "solicitacao";
 }

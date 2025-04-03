@@ -5,10 +5,10 @@ namespace Database\Seeders;
 use App\Models\Especialidade;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class EspecialidadeSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      */

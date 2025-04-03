@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Aluno extends Model
 {
-    /* protected $fillable =[
-        "nome",
+    protected $fillable =[
+        "nome_aluno",
+        "nivel_academico",
+        "telefone_aluno",
         "descricao",
-        "preco",
-        "imagem",
-        "slug",
+        "foto_aluno",
         "id_user",
-        "id_categoria",
-    ]; */
+    ];
 
     
     protected $table = "aluno";
