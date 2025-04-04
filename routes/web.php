@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /* Route::get('/', function () {
     return view('welcome');
@@ -14,14 +15,20 @@ Route::view("cadastro_de_Tutor", "cadastro/cadastroTutor")->name("cadastroTutor"
 Route::view("cadastro_de_Aluno", "cadastro/cadastroAluno")->name("cadastroAluno");
 
 /* rota para login de usuário */
-Route::view("TutorLink_Entrar", "login/login")->name("login");
+Route::view("TutorLink_Entrar", "login/login")->name("loginPage");
+/* rota de criação de sessão */
+Route::post('login', [UserController::class, 'login'])->name('login');
+/* terminar sessão */
+Route::get('logout', [UserController::class, 'logout'])->name('logout');
 
 
 /* outras rotas do user Tutor*/
-Route::view("home_tutor", "tutor/home")->name("tutorHome");
-Route::view("perfil_tutor", "tutor/perfil")->name("tutorPerfil");
-Route::view("notificação_tutor", "tutor/notificacao")->name("tutorNotifi");
-Route::view("mensagens_tutor", "tutor/msg")->name("tutorMsg");
+Route::middleware(['checkAuth'])->group(function () {
+    Route::view("home_tutor", "tutor/home")->name("tutorHome");
+    Route::view("perfil_tutor", "tutor/perfil")->name("tutorPerfil");
+    Route::view("notificação_tutor", "tutor/notificacao")->name("tutorNotifi");
+    Route::view("mensagens_tutor", "tutor/msg")->name("tutorMsg"); 
+});
 
 /* outras rotas do user Aluno*/
 Route::view("home_aluno", "aluno/home")->name("alunoHome");

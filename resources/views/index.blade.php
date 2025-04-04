@@ -35,7 +35,7 @@
             </form>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}"><div class="btn btn-success" style="color: #333333">Login</div></a>
+            <a class="nav-link" href="{{ route('loginPage') }}"><div class="btn btn-success" style="color: #333333">Login</div></a>
           </li>
         </ul>
 

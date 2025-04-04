@@ -29,7 +29,7 @@
         <a id="op" href="{{ route('tutorMsg') }}"><i class="bi bi-chat-dots-fill"></i><span> Mensagens</span></a>
         <br><br>
         
-        <a id="op" href="#"><i class="bi bi-box-arrow-right"></i><span>Sair</span></a>
+        <a id="op" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i><span>Sair</span></a>
     </div>
 
     <div class="main-content">
@@ -42,7 +42,7 @@
         <a href="{{ route('tutorPerfil') }}"><i class="bi bi-person-fill"></i><span>Perfil</span></a>
         <a href="{{ route('tutorNotifi') }}"><i class="bi bi-bell-fill"></i><span>Notificações</span></a>
         <a href="{{ route('tutorMsg') }}"><i class="bi bi-chat-dots-fill"></i><span>Mensagens</span></a>
-        <a href="#"><i class="bi bi-box-arrow-right"></i><span>Sair</span></a>
+        <a href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i><span>Sair</span></a>
     </div>
 
     <script>
