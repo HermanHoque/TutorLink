@@ -2,64 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Especialidade;
+use App\Models\Perfil_especialidade;
 use App\Models\Tutor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TutorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function perfil()
     {
-        //
+        $id = Auth::id();
+        $tutor = Tutor::where('id_user', $id)->first();
+        $especialidades = Especialidade::all();
+        $perfil_esps = Perfil_Especialidade::with('especialidade')->where('id_tutor', $tutor['id'])->get();
+        
+        /* foreach ($perfil_esps as $perfil_esp) {
+            echo "$perfil_esp";
+        } */
+        
+        return view('tutor/perfil', compact('tutor', 'especialidades', 'perfil_esps'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function home()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tutor $tutor)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tutor $tutor)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Tutor $tutor)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Tutor $tutor)
-    {
-        //
+        $id = Auth::id();
+        $tutor = Tutor::where('id_user', $id)->first();
+        $perfil_esps = Perfil_Especialidade::with('especialidade')->where('id_tutor', $tutor['id'])->get();
+        
+        /* foreach ($perfil_esps as $perfil_esp) {
+            echo "$perfil_esp";
+        } */
+        
+        return view('tutor/home', compact('perfil_esps'));
     }
 }

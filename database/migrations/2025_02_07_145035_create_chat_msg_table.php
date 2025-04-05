@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('chat_msg', function (Blueprint $table) {
             $table->id();
-            $table->string("msg")->nullable();
-            $table->string("estado", 10)->nullable()->default("não lida");
+            $table->string("msg")->nullable(false);
+            $table->string("estado", 10)->nullable(false)->default("não lida");
 
             $table->unsignedBigInteger("id_remetente");
             $table->foreign("id_remetente")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");

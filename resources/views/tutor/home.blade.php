@@ -49,38 +49,55 @@
             <hr id="tracoHeader">   
     </div>
 
-        <div class="row align-items-center">
-            @for ($i = 1; $i <= 3; $i++)
-            <div class="col" style="padding-top: 20px">
-                <div class="container">
-                  <div class="card shadow-sm p-3">
-                        <div id="card-body">
-                            <div class="">
-                                <div>{{-- info tutor --}}
-                                    <h5 class="mb-0"><strong>Progamação WEB</strong></h5>
-                                    <hr>
-                                </div>
+    <div class="row align-items-center">
+
+        @empty($perfil_esps->count())
+        
+            <div class="text-center">
+                <img src="{{ asset('img/ask_11049522.png') }}" style="width: 200px; height: 200px;" alt="vazio"><br>
+                <span><strong>Não há perfis para mostrar no momento!</strong></span>
+            </div>
+
+        @else        
+        @foreach ($perfil_esps as $perfil_esp)
+        <div class="col" style="padding-top: 20px">
+            <div class="container">
+              <div class="card shadow-sm p-3">
+                    <div id="card-body">
+                        <div class="">
+                            <div>{{-- info tutor --}}
+                                <h5 class="mb-0"><strong>{{$perfil_esp->especialidade->nome}}</strong></h5>
+                                <hr>
                             </div>
-                            {{-- sobre a aula --}}
-                            <strong>Tipo de aula:</strong>  Particular <br>
-                            <div style="padding-bottom: 5px"></div>
-                            <strong>Nº de alunos:</strong> 1 <br>
-                            <div style="padding-bottom: 5px"></div>
-                            <strong>Custo:</strong> 0 <br>
-                            <div style="padding-bottom: 5px"></div>
-                            <p class="text-muted small"> é o processo de desenvolvimento de sites e aplicações acessíveis por meio de navegadores. Ela envolve tecnologias como HTML (estrutura da página), CSS (estilização) e JavaScript (interatividade). No backend, linguagens como PHP, Python, Node.js e Ruby são usadas para processar dados e gerenciar bancos de dados.</p>
                         </div>
-                    
-                        <div class="card-footer d-flex gap-2">
-                            <a href="#" class="btn btn-outline-secondary w-50">Ver alunos</a>
-                            <a href="#" class="btn btn-danger w-50">
-                                <i class="bi bi-x-circle"></i> Terminar
-                            </a>
-                        </div>
+                        {{-- sobre a aula --}}
+                        <strong>Tipo de aula:</strong>  
+                        @if ($perfil_esp->tipo == 1)
+                            Coletiva
+                        @else
+                            Particular
+                        @endif 
+                        <br>
+                        <div style="padding-bottom: 5px"></div>
+                        <strong>Nº de alunos:</strong> {{$perfil_esp->num_aluno}} <br>
+                        <div style="padding-bottom: 5px"></div>
+                        <strong>Custo:</strong> {{$perfil_esp->custo}} <br>
+                        <div style="padding-bottom: 5px"></div>
+                        <p class="text-muted small"> {{$perfil_esp->descricao}}</p>
+                    </div>
+                
+                    <div class="card-footer d-flex gap-2">
+                        <a href="#" class="btn btn-outline-secondary w-50">Ver alunos</a>
+                        <a href="#" class="btn btn-danger w-50">
+                            <i class="bi bi-x-circle"></i> Terminar
+                        </a>
                     </div>
                 </div>
+            </div>
         </div>
-        @endfor
+        @endforeach
+        @endempty
+       
     </div>
 
 

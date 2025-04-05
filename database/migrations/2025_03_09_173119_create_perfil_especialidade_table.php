@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('perfil_especialidade', function (Blueprint $table) {
             $table->id();
-            $table->string("tipo", 10)->nullable();
-            $table->string("custo", 40)->nullable()->default("0");
-            $table->integer("num_aluno")->nullable()->default(1);
+            $table->string("tipo", 10)->nullable(false);
+            $table->string("custo", 40)->nullable(false)->default("0");
+            $table->integer("num_aluno")->nullable(false)->default(1);
             $table->string("descricao", 100)->nullable(false);
 
             $table->unsignedBigInteger("id_especialidade");
+            $table->unsignedBigInteger("id_tutor");
             $table->foreign("id_especialidade")->references("id")->on("especialidade")->onDelete("cascade")->onUpdate("cascade");
+            $table->foreign("id_tutor")->references("id")->on("tutor")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('especialidade', function (Blueprint $table) {
             $table->id();
             $table->string("nome", 50)->nullable();
-            $table->string("descricao")->nullable(false);
+            $table->string("descricao")->nullable();
             $table->timestamps();
         });
     }

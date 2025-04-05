@@ -12,4 +12,10 @@ class Especialidade extends Model
         "descricao"
     ];
     protected $table = "especialidade";
+
+    public function perfil_especialidade()
+    {
+        // um para muitos
+        return $this->hasMany(Perfil_especialidade::class, 'id_especialidade', 'id');
+    }
 }

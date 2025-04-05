@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,23 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+    public function userType()
+    {
+        $id = Auth::id();//id do user autenticado
+        $user = User::where('id', $id)->first();
+
+        /* echo var_dump($user['perfil']); */
+
+        if ($user['perfil'] == 'aluno') {
+            return redirect()->route('alunoHome');
+        } elseif ($user['perfil'] == 'tutor') {
+            return redirect()->route('tutorHome');
+        }
+        
+    }
+    
     public function login(Request $rqt)
     {
         $credenciais = $rqt->only('email', 'password');//credenciais 
@@ -18,7 +36,7 @@ class UserController extends Controller
         /* autenticar o usuário e verificar os dados na bd*/
         if (Auth::attempt($credenciais)) {
             $rqt->session()->regenerate();
-            return redirect()->intended('home_tutor');
+            return redirect()->intended('user_type');
         }else {
             return redirect()->back()->with('erro',' Email ou Password inválida!');
         } 

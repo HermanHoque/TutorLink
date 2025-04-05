@@ -13,7 +13,7 @@
 
     <div id="cardPerfil">
         <div class="sessao_perfil">
-            <img src="{{ asset('img/goj4.jpg') }}" alt="Foto de perfil" class="perfil_foto">
+            <img src="{{ asset('img/school_16658380.png') }}" alt="Foto de perfil" class="perfil_foto">
             <div class="op_user">
                 <button class="btn btn-sm" style="background-color: #157347; color: white">
                     <i class="bi bi-pencil-square"></i> Editar perfil
@@ -21,18 +21,18 @@
             </div>
         </div>
         <div class="info_user">
-            <h4>Satoru Gojo</h4>
+            <h4>{{$aluno['nome_aluno']}}</h4>
             <hr>
             <p style="color: #007bff;">
-                <i class="bi bi-telephone"> -</i> 934 816 063
+                <i class="bi bi-telephone"> -</i> {{$aluno['telefone_aluno']}}
             </p>
 
             <p style="color: #007bff;">
-                <i class="bi bi-mortarboard"> -</i> Ensino médio
+                <i class="bi bi-mortarboard"> -</i> {{$aluno['nivel_academico']}}
             </p>
 
             <p style="color: #007bff;">
-                <i class="bi bi-file-text"> -</i> Sobre você: Satoru Gojo é um dos personagens mais populares de Jujutsu Kaisen. Ele é um feiticeiro de jujutsu extremamente poderoso...
+                <i class="bi bi-file-text"> -</i> Sobre você: {{$aluno['descricao']}}
             </p>
             <div class="estatos">
                 <div style="width: 200px;">
