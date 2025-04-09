@@ -39,11 +39,11 @@ Route::middleware(['checkAuth'])->group(function () {
 
 /* outras rotas do user Aluno*/
 Route::middleware(['checkAuth'])->group(function () {
-    Route::view("home_aluno", "aluno/home")->name("alunoHome");
+    Route::get('home_aluno', [AlunoController::class, 'home'])->name('alunoHome');
     Route::get('perfil_aluno', [AlunoController::class, 'perfil'])->name('alunoPerfil');
+    Route::post('detalhes_turor', [AlunoController::class, 'detalhes'])->name('detalhes');
     Route::view("notificação_aluno", "aluno/notificacao")->name("alunoNotifi");
     Route::view("mensagens_aluno", "aluno/msg")->name("alunoMsg");
-    Route::view('detalhes', 'aluno/detalhes')->name("detalhes");
         
 });
 

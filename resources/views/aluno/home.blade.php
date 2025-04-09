@@ -5,7 +5,7 @@
 
       <div id="cabecalho">
         <div class="row" id="title">
-            <div class="col" style="font-size: 20pt">
+            <div class="col" style="font-size: 20pt"> 
                 <i class="bi bi-house"></i>
                 <strong>Home</strong>
             </div>
@@ -54,7 +54,7 @@
   <div class="container">
         
           <div class="row align-items-center">
-            @for ($i = 1; $i <= 6; $i++)
+            @foreach ($tutores as $tutor)
             {{-- cards --}}
             <div class="col" style="padding-top: 20px">
               <div class="container">
@@ -65,9 +65,9 @@
                           <img src="{{ asset('img/04ed3062ae591647e73e80cd8ec972b5.jpg') }}"
                           alt="Foto de perfil" class="profile-pic me-3">
                           <div>{{-- info tutor --}}
-                              <h5 class="mb-0">Madara Uchiha</h5>
+                              <h5 class="mb-0">{{$tutor->nome_tutor}}</h5>
                               <small class="text-muted">
-                                <i class="bi bi-geo-alt"> -</i> Konoha
+                                <i class="bi bi-geo-alt"> -</i> {{$tutor->endereco}}
                               </small>
                           </div>
                       </div>
@@ -88,18 +88,28 @@
                         <strong>Especialidades:</strong> Inglês, Matemática, Física
                       </p>
                       <p>
-                        <strong>Nivél Académico:</strong> Hokage das Sombras
+                        <strong>Nivél Académico:</strong> {{$tutor->nivel_academico}}
                       </p>
-                      <p class="text-muted small">Madara Uchiha é um dos vilões mais poderosos e carismáticos de Naruto. Ele foi um dos fundadores da Vila Oculta da Folha (Konoha), ao lado de Hashirama Senju, mas sua visão distorcida de paz e justiça o levou a se tornar um antagonista.</p>
+                      <p class="text-muted small">{{$tutor->descricao}}</p>
                   </div>
-                    <div class="card-footer d-flex gap-2">
-                      <a href="{{ route('detalhes') }}" class="btn w-50"  id="btnH1">Detalhes</a>
+
+                    <form action="{{ route('detalhes') }}" method="post">
+                      @csrf
+                      <div class="card-footer d-flex gap-2">
+                        <input type="hidden" name="id_tutor" value="{{$tutor->id}}">
+                        <button type="submit" class="btn w-50"  id="btnH1">
+                          Detalhes
+                        </button>
                       <a href="#" class="btn btn-outline-secondary w-50">WhatsApp</a>
                     </div>
+                    </form>
+
+                      
+                    
                 </div>
               </div>
             </div>
-            @endfor 
+            @endforeach
         </div>
         
   </div>

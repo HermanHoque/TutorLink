@@ -18,6 +18,7 @@ class TutorController extends Controller
         $id = Auth::id();
         $tutor = Tutor::where('id_user', $id)->first();
         $especialidades = Especialidade::all();
+        //pegar perfis de especialidades de um tutor
         $perfil_esps = Perfil_Especialidade::with('especialidade')->where('id_tutor', $tutor['id'])->get();
         
         /* foreach ($perfil_esps as $perfil_esp) {
@@ -31,6 +32,7 @@ class TutorController extends Controller
     {
         $id = Auth::id();
         $tutor = Tutor::where('id_user', $id)->first();
+        //pegar perfis de especialidades de um tutor
         $perfil_esps = Perfil_Especialidade::with('especialidade')->where('id_tutor', $tutor['id'])->get();
         
         /* foreach ($perfil_esps as $perfil_esp) {

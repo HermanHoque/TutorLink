@@ -22,19 +22,19 @@
                 </div>
             </div>
             <div class="info_user">
-                <h4>Eren Yeager</h4>
+                <h4>{{$tutor->nome_tutor}}</h4>
                 <hr>
                         <p style="color: #007bff;">
-                            <i class="bi bi-mortarboard"> -</i> Ensino Superior
+                            <i class="bi bi-mortarboard"> -</i> {{$tutor->nivel_academico}}
                         </p>
                         <p style="color: #007bff;">
-                            <i class="fa-brands fa-whatsapp"> -</i> 922 655 422
+                            <i class="fa-brands fa-whatsapp"> -</i> {{$tutor->whatsapp}}
                         </p>
                         <p style="color: #007bff;">
-                            <i class="bi bi-telephone"> -</i> 922 655 422
+                            <i class="bi bi-telephone"> -</i> {{$tutor->telefone_tutor}}
                         </p>
                         <p style="color: #007bff;">
-                            <i class="bi bi-geo-alt"> -</i> Cacuaco - Vidrul
+                            <i class="bi bi-geo-alt"> -</i> {{$tutor->endereco}}
                         </p>
             </div>
           </div>
@@ -51,7 +51,8 @@
                 </h4>
                 <hr>
                 <p style="color: #007bff;">
-                    Eren Yeager é o protagonista de Attack on Titan (Shingeki no Kyojin), mas sua jornada é repleta de ambiguidades morais. No início, ele é motivado por um desejo de vingança contra os Titãs após testemunhar a destruição de sua cidade e a morte de sua mãe...
+                    {{-- Str:limit limita o número de caracteres --}}
+                    {{ Str::limit($tutor->descricao, 50) }}
                 </p>
             </div>
           </div>
@@ -81,25 +82,40 @@
     </div>
 
         <div class="row align-items-center">
-            @for ($i = 1; $i <= 3; $i++)
+            @empty($perfil_esps->count())
+        
+            <div class="text-center">
+                <img src="{{ asset('img/ask_11049522.png') }}" style="width: 200px; height: 200px;" alt="vazio"><br>
+                <span><strong>Não há perfis para mostrar no momento!</strong></span>
+            </div>
+
+            @else
+            @foreach ( $perfil_esps as $perfil_esp)
             <div class="col" style="padding-top: 20px">
                 <div class="container">
                   <div class="card shadow-sm p-3">
                         <div id="card-body">
                             <div class="">
                                 <div>{{-- info tutor --}}
-                                    <h5 class="mb-0"><strong>Progamação WEB</strong></h5>
+                                    <h5 class="mb-0"><strong>{{$perfil_esp->especialidade->nome}}</strong></h5>
                                     <hr>
                                 </div>
                             </div>
                             {{-- sobre a aula --}}
-                            <strong>Tipo de aula:</strong>  Particular <br>
+                            <strong>Tipo de aula:</strong> 
+                            @if ($perfil_esp->tipo == 1)
+                                Coletiva
+                            @else
+                                Particular
+                            @endif 
+                             <br>
                             <div style="padding-bottom: 5px"></div>
-                            <strong>Nº de alunos:</strong> 1 <br>
+                            <strong>Nº de alunos:</strong> {{$perfil_esp->num_aluno}} <br>
                             <div style="padding-bottom: 5px"></div>
-                            <strong>Custo:</strong> 0 <br>
+                            <strong>Custo:</strong> {{$perfil_esp->custo}} Kz<br>
                             <div style="padding-bottom: 5px"></div>
-                            <p class="text-muted small"> é o processo de desenvolvimento de sites e aplicações acessíveis por meio de navegadores. Ela envolve tecnologias como HTML (estrutura da página), CSS (estilização) e JavaScript (interatividade). No backend, linguagens como PHP, Python, Node.js e Ruby são usadas para processar dados e gerenciar bancos de dados.</p>
+                            <p class="text-muted small"> 
+                                {{$perfil_esp->descricao}}.</p>
                         </div> 
                     
                         <div class="card-footer text-center">
@@ -111,7 +127,8 @@
                     </div>
                 </div>
         </div>
-        @endfor
+        @endforeach
+        @endempty
     </div>
 
 </div>
