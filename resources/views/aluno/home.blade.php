@@ -62,8 +62,11 @@
                   <div id="card-body">
                     {{-- foto perfil e info --}}
                       <div class="d-flex align-items-center">
-                          <img src="{{ asset('img/04ed3062ae591647e73e80cd8ec972b5.jpg') }}"
-                          alt="Foto de perfil" class="profile-pic me-3">
+                        @empty($tutor->foto_tutor)
+                          <img src="{{ asset('img/student_5333052.png') }}" class="profile-pic" alt="Foto de perfil">
+                        @else
+                            <img src="{{ asset('img/23.jpg') }}" class="profile-pic" alt="Foto de perfil">
+                        @endempty
                           <div>{{-- info tutor --}}
                               <h5 class="mb-0">{{$tutor->nome_tutor}}</h5>
                               <small class="text-muted">

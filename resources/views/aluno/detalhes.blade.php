@@ -14,7 +14,11 @@
       <div class="col-md-6">
           <div id="cardPerfil">
             <div class="sessao_perfil">
-                <img src="{{ asset('img/23.jpg') }}" class="profile-pic" alt="Foto de perfil">
+                @empty($tutor->foto_tutor)
+                    <img src="{{ asset('img/student_5333052.png') }}" class="profile-pic" alt="Foto de perfil">
+                @else
+                    <img src="{{ asset('img/23.jpg') }}" class="profile-pic" alt="Foto de perfil">
+                @endempty
                 <div class="op_user">
                     <button class="btn btn-sm" style="background-color: #157347; color: white">
                         <i class="bi bi-whatsapp"></i> WhatsApp

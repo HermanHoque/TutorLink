@@ -11,40 +11,75 @@
             <hr id="tracoHeader">   
     </div>
 
-    <div id="cardPerfil">
-        <div class="sessao_perfil">
-            <img src="{{ asset('img/school_16658380.png') }}" alt="Foto de perfil" class="perfil_foto">
-            <div class="op_user">
-                <button class="btn btn-sm" style="background-color: #157347; color: white">
-                    <i class="bi bi-pencil-square"></i> Editar perfil
-                </button>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col" style="margin-top: 5px;">
+            <div id="cardPerfil">
+                <div class="info_user">
+                    <div class="d-flex align-items-center">
+                        @empty($aluno->foto_aluno){{-- foto --}}
+                            <img src="{{ asset('img/school_16658380.png') }}" alt="Foto de perfil" class="perfil_foto" style="width: 50px; height: 50px;">
+                        @else
+                            <img src="{{ asset('img/23.jpg') }}" class="profile-pic" alt="Foto de perfil">
+                        @endempty
+                        <div>
+                            <h4 style="margin: 0px;">{{$aluno['nome_aluno']}}</h4>
+                            <span class="" style="font-size: 10pt; font-family: monospace; margin: 0px; padding-left: 5px;">
+                                *Aluno*
+                            </span>
+                        </div>
+                         <!-- Botão "Editar perfil" no lado direito -->
+                         <div class="ms-auto">
+                            <button class="btn btn-sm rounded-circle" style="background-color: #157347; color: white">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    <p style="color: #007bff;">
+                        <i class="bi bi-telephone"> -</i> {{$aluno['telefone_aluno']}}
+                    </p>
+                    <p style="color: #007bff;">
+                        <i class="bi bi-mortarboard"> -</i> {{$aluno['nivel_academico']}}
+                    </p>
+                    <p style="color: #007bff;">
+                        <i class="bi bi-file-text"> -</i> Sobre você:
+                        {{Str::limit($aluno['descricao'], 40)}}
+                    </p>
+                    <div class="estatos">
+                        <div style="width: 200px;">
+                            <strong style="padding-left: 15px;">3</strong>
+                            <p>Aulas</p>
+                        </div>
+            
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="info_user">
-            <h4>{{$aluno['nome_aluno']}}</h4>
-            <hr>
-            <p style="color: #007bff;">
-                <i class="bi bi-telephone"> -</i> {{$aluno['telefone_aluno']}}
-            </p>
 
-            <p style="color: #007bff;">
-                <i class="bi bi-mortarboard"> -</i> {{$aluno['nivel_academico']}}
-            </p>
-
-            <p style="color: #007bff;">
-                <i class="bi bi-file-text"> -</i> Sobre você: {{$aluno['descricao']}}
-            </p>
-            <div class="estatos">
-                <div style="width: 200px;">
-                    <strong style="padding-left: 15px;">3</strong>
-                    <p>Aulas</p>
+        <div class="col" style="margin-top: 5px;">
+            <div id="cardPerfil">
+                <div class="info_user">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h4>Solicitações em espera</h4>
+                        </div>
+                         <!-- Botão "ver solicitações" no lado direito -->
+                         <div class="ms-auto">
+                            <button class="btn btn-sm rounded-circle" style="background-color: #157347; color: white">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-center" style="font-size: 20pt;">
+                        <strong><i class="bi bi-bell"></i> - 4</strong>
+                    </div>
                 </div>
-               
             </div>
         </div>
     </div>
     <br>
-    <div>
         {{-- segundo cabeçalho --}}
         <div id="cabecalho">
             <div class="row" id="title">

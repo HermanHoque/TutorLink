@@ -35,16 +35,27 @@
   <div class="container mt-4">
     <div class="row">
         <div class="col-md-6">
-            <div class="card p-3" style="margin-top: 5px;">
+            <div class="card p-3 shadow" style="margin-top: 5px;">
                 <div class="d-flex align-items-center">
-                    <img src="{{ asset('img/student_5333052.png') }}" class="profile-pic" alt="Foto de perfil">
+                    @empty($tutor->foto_tutor)
+                        <img src="{{ asset('img/student_5333052.png') }}" class="profile-pic" alt="Foto de perfil">
+                    @else
+                        <img src="{{ asset('img/23.jpg') }}" class="profile-pic" alt="Foto de perfil">
+                    @endempty
                     <div style="margin-left: 10px">
-                        <h4>{{$tutor['nome_tutor']}}</h4>
-                        <button class="btn btn-sm" style="background-color: #157347; color: white">
-                            <i class="bi bi-pencil-square"></i> Editar perfil
+                        <h4 style="margin: 0px;">{{$tutor['nome_tutor']}}</h4>
+                        <span class="" style="font-size: 10pt; font-family: monospace; margin: 0px; padding-left: 5px;"> 
+                            *Tutor*
+                        </span> 
+                    </div>
+                    <!-- Botão "Editar perfil" no lado direito -->
+                    <div class="ms-auto">
+                        <button class="btn btn-sm rounded-circle" style="background-color: #157347; color: white">
+                            <i class="bi bi-pencil-square"></i>
                         </button>
                     </div>
                 </div>
+                
                 <hr>
                 <p style="color: #007bff;">
                     <i class="bi bi-mortarboard"> -</i> {{$tutor['nivel_academico']}}
@@ -59,7 +70,8 @@
                     <i class="bi bi-geo-alt"> -</i> {{$tutor['endereco']}}
                 </p>
                 <p style="color: #007bff;">
-                    <i class="bi bi-file-text"> -</i> Sobre você: {{$tutor['descricao']}}
+                    <i class="bi bi-file-text"> -</i> Sobre você: 
+                    {{Str::limit($tutor['descricao'], 50)}}
                 </p>
             </div>
         </div>
