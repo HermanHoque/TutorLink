@@ -20,28 +20,37 @@
   <header class="header">
     <nav class="navbar navbar-expand-lg container">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src="{{ asset('img/TutorLinkLogo.svg') }}" alt="sem logo" style="width: 50px; height: 40px;">
-          TutorLink</a>
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="{{ asset('img/TutorLinkLogo.svg') }}" alt="sem logo" style="width: 50px; height: 40px; margin-right: 8px;">
+          <span class="fw-bold">TutorLink</span>
+        </a>
+  
+        <!-- Botão do menu para celular -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
-        <ul class="nav collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
-          <li class="nav-item">
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Pesquisar Tutor" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-            </form>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('loginPage') }}"><div class="btn btn-success" style="color: #333333">Login</div></a>
-          </li>
-        </ul>
-
+  
+        <!-- Itens do menu -->
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-2 mt-2 mt-lg-0">
+            <li class="nav-item">
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar Tutor" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+              </form>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('loginPage') }}">
+                <div class="btn btn-success" style="color: #333333">Login</div>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   </header>
+  
 
   <!-- Hero / Banner Principal -->
   <section class="hero">
