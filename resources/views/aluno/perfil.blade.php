@@ -24,9 +24,9 @@
                         @endempty
                         <div>
                             <h4 style="margin: 0px;">{{$aluno['nome_aluno']}}</h4>
-                            <span class="" style="font-size: 10pt; font-family: monospace; margin: 0px; padding-left: 5px;">
-                                *Aluno*
-                            </span>
+                            <span style="font-size: 10pt; font-family: monospace; margin: 0px; padding-left: 5px; color: rgba(0, 0, 0, 0.4);">
+                                <em>*Aluno*</em>
+                            </span>                            
                         </div>
                          <!-- Botão "Editar perfil" no lado direito -->
                          <div class="ms-auto">
@@ -57,6 +57,7 @@
             </div>
         </div>
 
+
         <div class="col" style="margin-top: 5px;">
             <div id="cardPerfil">
                 <div class="info_user">
@@ -73,7 +74,7 @@
                     </div>
                     <hr>
                     <div class="text-center" style="font-size: 20pt;">
-                        <strong><i class="bi bi-bell"></i> - 4</strong>
+                        <strong><i class="bi bi-bell"></i> - {{$solicitacoes->count()}}</strong>
                     </div>
                 </div>
             </div>

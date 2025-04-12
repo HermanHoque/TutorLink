@@ -10,6 +10,19 @@
     </div>
     <hr id="tracoHeader">   
   </div>
+    @if ($msg = Session::get("notif"))
+
+        <div class="alert alert-primary alert-dismissible fade show position-fixed top-0 end-0 m-3 z-3" role="alert">
+            <strong>
+                <i class="bi bi-check-square-fill"></i>
+                {{$msg}}
+            </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+  
+    @endif
+
+
   <div class="row">
       <div class="col-md-6">
           <div id="cardPerfil">
@@ -109,12 +122,15 @@
                             <strong>Tipo de aula:</strong> 
                             @if ($perfil_esp->tipo == 1)
                                 Coletiva
+                                <br>
+                                <div style="padding-bottom: 5px"></div>
+                                <strong>Nº de alunos:</strong> 0/{{$perfil_esp->num_aluno}} <br>
                             @else
                                 Particular
+                                <br>
+                               <div style="padding-bottom: 5px"></div>
+                               <strong>Nº de alunos:</strong> {{$perfil_esp->num_aluno}} <br>
                             @endif 
-                             <br>
-                            <div style="padding-bottom: 5px"></div>
-                            <strong>Nº de alunos:</strong> {{$perfil_esp->num_aluno}} <br>
                             <div style="padding-bottom: 5px"></div>
                             <strong>Custo:</strong> {{$perfil_esp->custo}} Kz<br>
                             <div style="padding-bottom: 5px"></div>
@@ -122,12 +138,19 @@
                                 {{$perfil_esp->descricao}}.</p>
                         </div> 
                     
-                        <div class="card-footer text-center">
-                            <a href="#" class="btn btn-outline-secondary w-100">
-                                <i class="bi bi-bell"></i>
-                                Solicitar Aula
-                            </a>
-                        </div>
+                        <form action="{{ route('solicitacao') }}" method="POST">
+                            @csrf
+                            <div class="card-footer text-center">
+                                <input type="hidden" name="id_perfil_especialidade" value="{{$perfil_esp->id}}">
+                                <input type="hidden" name="id_tutor" value="{{$perfil_esp->id_tutor}}">
+                                <input type="hidden" name="uuid_tutor" value="{{$tutor->uuid_tutor}}">
+                                <input type="hidden" name="id_aluno" value="{{$id_aluno}}">
+                                <button type="submit" class="btn btn-outline-secondary w-100">
+                                    <i class="bi bi-bell"></i>
+                                    Solicitar Aula
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
         </div>

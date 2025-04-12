@@ -11,6 +11,6 @@ class EspecialidadeController extends Controller
     {
         $perfil_data = $rqt->all();
         Perfil_especialidade::create($perfil_data);
-        return redirect()->route('tutorPerfil')->with('erro', 'Perfil criado com sucesso!');
+        return redirect()->route('tutorPerfil')->with('notif', 'Perfil criado com sucesso!');
     }
 }

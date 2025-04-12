@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Tutor extends Model
 {
@@ -20,9 +21,22 @@ class Tutor extends Model
     
     protected $table = "tutor";
 
+    protected static function booted()
+    {
+        static::creating(function ($tutor) {
+            $tutor->uuid_tutor = Str::uuid();
+        });
+    }
+
     public function perfil_especialidade()
     {
         // um para muitos
         return $this->hasMany(Perfil_especialidade::class, 'id_tutor', 'id');
+    }
+
+    public function solicitacao()
+    {
+        // um para muitos
+        return $this->hasMany(Solicitacao::class, 'id_tutor', 'id');
     }
 }

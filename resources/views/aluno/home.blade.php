@@ -96,18 +96,12 @@
                       <p class="text-muted small">{{$tutor->descricao}}</p>
                   </div>
 
-                    <form action="{{ route('detalhes') }}" method="post">
-                      @csrf
                       <div class="card-footer d-flex gap-2">
-                        <input type="hidden" name="id_tutor" value="{{$tutor->id}}">
-                        <button type="submit" class="btn w-50"  id="btnH1">
+                        <a href="{{ route('detalhes', $tutor->uuid_tutor) }}" class="btn w-50"  id="btnH1">
                           Detalhes
-                        </button>
+                        </a>
                       <a href="#" class="btn btn-outline-secondary w-50">WhatsApp</a>
-                    </div>
-                    </form>
-
-                      
+                    </div>                    
                     
                 </div>
               </div>

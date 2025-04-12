@@ -11,15 +11,7 @@
     <hr id="tracoHeader">   
   </div>
 
-  @if ($msg = Session::get("erro"))
-    	
-		{{-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
-			<strong>
-				<i class="bi bi-exclamation-triangle text-danger"></i>
-				{{$msg}}
-			</strong>
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div> --}}
+  @if ($msg = Session::get("notif"))
 
 		<div class="alert alert-primary alert-dismissible fade show position-fixed top-0 end-0 m-3 z-3" role="alert">
 			<strong>
@@ -44,8 +36,8 @@
                     @endempty
                     <div style="margin-left: 10px">
                         <h4 style="margin: 0px;">{{$tutor['nome_tutor']}}</h4>
-                        <span class="" style="font-size: 10pt; font-family: monospace; margin: 0px; padding-left: 5px;"> 
-                            *Tutor*
+                        <span class="" style="font-size: 10pt; font-family: monospace; margin: 0px; padding-left: 5px; color: rgba(0, 0, 0, 0.4);"> 
+                            <em>*Tutor*</em>
                         </span> 
                     </div>
                     <!-- Botão "Editar perfil" no lado direito -->
@@ -147,14 +139,17 @@
                             <strong>Tipo de aula:</strong>  
                             @if ($perfil_esp->tipo == 1)
                                 Coletiva
+                                <br>
+                                <div style="padding-bottom: 5px"></div>
+                                <strong>Nº de alunos:</strong> 0/{{$perfil_esp->num_aluno}} <br>
                             @else
                                 Particular
+                                <br>
+                                <div style="padding-bottom: 5px"></div>
+                                <strong>Nº de alunos:</strong> {{$perfil_esp->num_aluno}} <br>
                             @endif 
-                            <br>
                             <div style="padding-bottom: 5px"></div>
-                            <strong>Nº de alunos:</strong> {{$perfil_esp->num_aluno}} <br>
-                            <div style="padding-bottom: 5px"></div>
-                            <strong>Custo:</strong> {{$perfil_esp->custo}} <br>
+                            <strong>Custo:</strong> {{$perfil_esp->custo}} Kz<br>
                             <div style="padding-bottom: 5px"></div>
                             <p class="text-muted small"> {{$perfil_esp->descricao}}</p>
                         </div>

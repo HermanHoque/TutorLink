@@ -30,7 +30,6 @@ Route::get('user_type', [UserController::class, 'userType'])->name('userType');
 /* outras rotas do user Tutor*/
 Route::middleware(['checkAuth'])->group(function () {
     Route::get('home_tutor', [TutorController::class, 'home'])->name('tutorHome');
-    Route::view("perfil_tutor", "tutor/perfil")->name("tutorPerfil");
     Route::get('perfil_tutor', [TutorController::class, 'perfil'])->name('tutorPerfil');
     Route::view("notificação_tutor", "tutor/notificacao")->name("tutorNotifi");
     Route::view("mensagens_tutor", "tutor/msg")->name("tutorMsg");
@@ -41,7 +40,9 @@ Route::middleware(['checkAuth'])->group(function () {
 Route::middleware(['checkAuth'])->group(function () {
     Route::get('home_aluno', [AlunoController::class, 'home'])->name('alunoHome');
     Route::get('perfil_aluno', [AlunoController::class, 'perfil'])->name('alunoPerfil');
-    Route::post('detalhes_turor', [AlunoController::class, 'detalhes'])->name('detalhes');
+    Route::match(['post', 'get'],'detalhes/{uuid}', [AlunoController::class, 'detalhes'])->name('detalhes');
+    Route::match(['get', 'post'],'detalhes_turorGet/{id_tutor}/{id_aluno}', [AlunoController::class, 'detalhesGet'])->name('detalhesGet');
+    Route::post('solicitar_aluna', [AlunoController::class, 'solicitacao'])->name('solicitacao');
     Route::view("notificação_aluno", "aluno/notificacao")->name("alunoNotifi");
     Route::view("mensagens_aluno", "aluno/msg")->name("alunoMsg");
         
