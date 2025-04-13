@@ -11,7 +11,7 @@
     <hr id="tracoHeader">   
   </div>
 
-  @if ($msg = Session::get("notif"))
+    @if ($msg = Session::get("notif"))
 
 		<div class="alert alert-primary alert-dismissible fade show position-fixed top-0 end-0 m-3 z-3" role="alert">
 			<strong>
@@ -21,7 +21,6 @@
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		</div>
 		
-
 	@endif
  
   <div class="container mt-4">

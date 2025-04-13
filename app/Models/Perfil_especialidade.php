@@ -27,4 +27,10 @@ class Perfil_especialidade extends Model
         //muitos para um
         return $this->belongsTo(Especialidade::class, 'id_especialidade');
     }
+
+    public function solicitacao()
+    {
+        // um para muitos
+        return $this->hasMany(Solicitacao::class, 'id_perfil_especialidade', 'id');
+    }
 }

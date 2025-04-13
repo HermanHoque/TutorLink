@@ -26,5 +26,11 @@ class Solicitacao extends Model
         //muitos para um
         return $this->belongsTo(Tutor::class, 'id_tutor');
     }
+
+    public function perfil_especialidade()
+    {
+        //muitos para um
+        return $this->belongsTo(Perfil_especialidade::class, 'id_perfil_especialidade');
+    }
     protected $table = "solicitacao";
 }

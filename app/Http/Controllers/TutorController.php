@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Especialidade;
 use App\Models\Perfil_especialidade;
+use App\Models\Solicitacao;
 use App\Models\Tutor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use function Pest\Laravel\get;
 
 class TutorController extends Controller
 {
@@ -15,30 +18,95 @@ class TutorController extends Controller
      */
     public function perfil()
     {
+        /* metodo para pagina de perfil */
+        
         $id = Auth::id();
         $tutor = Tutor::where('id_user', $id)->first();
         $especialidades = Especialidade::all();
         //pegar perfis de especialidades de um tutor
         $perfil_esps = Perfil_Especialidade::with('especialidade')->where('id_tutor', $tutor['id'])->get();
         
-        /* foreach ($perfil_esps as $perfil_esp) {
-            echo "$perfil_esp";
-        } */
-        
         return view('tutor/perfil', compact('tutor', 'especialidades', 'perfil_esps'));
     }
 
     public function home()
     {
+        /* metodo para pagina home */
+
         $id = Auth::id();
         $tutor = Tutor::where('id_user', $id)->first();
         //pegar perfis de especialidades de um tutor
         $perfil_esps = Perfil_Especialidade::with('especialidade')->where('id_tutor', $tutor['id'])->get();
         
-        /* foreach ($perfil_esps as $perfil_esp) {
-            echo "$perfil_esp";
-        } */
-        
         return view('tutor/home', compact('perfil_esps'));
     }
+
+    public function notificacao()
+    {
+        /* metodo para pagina de notificação */
+
+        $id = Auth::id();
+        $tutor = Tutor::where('id_user', $id)->value('id');
+
+        $solicitacoes = Solicitacao::with('tutor.perfil_especialidade.especialidade')
+        ->with('aluno')
+        ->where('id_tutor', $tutor)
+        ->where('resposta_tutor', 'em espera')
+        ->orderBy('created_at', 'desc') // ordena do mais recente para o mais antigo
+        ->get();
+        $pag = 'naoAceite';
+
+        return view('tutor/notificacao', compact('solicitacoes', 'pag'));
+        
+    }
+
+    public function notificacaoAceite()
+    {
+        /* metodo para pagina de notificaçãoAceite */
+        
+        $id = Auth::id();
+        $tutor = Tutor::where('id_user', $id)->value('id');
+
+        $solicitacoes = Solicitacao::with('tutor.perfil_especialidade.especialidade')
+        ->with('aluno')
+        ->where('id_tutor', $tutor)
+        ->where('resposta_tutor', 'aceite')
+        ->orderBy('created_at', 'desc') // ordena do mais recente para o mais antigo
+        ->get();
+        $pag = 'aceite';
+
+        return view('tutor/notificacao', compact('solicitacoes', 'pag'));
+        
+    }
+
+    public function respostaSolici(Request $rqt)
+    {
+        /* metodo para responder solicitações */
+        
+        $id = $rqt->input('id_solici');
+        $resposta = $rqt->input('rp');
+
+        //atualizar a resposta do tutor
+        if ($resposta == 'aceite') {
+
+            $solicitacao = Solicitacao::find($id);
+            $solicitacao->resposta_tutor = 'aceite';
+            $solicitacao->save();
+
+        } elseif ($resposta == 'recusada') {
+
+            $solicitacao = Solicitacao::find($id);
+            $solicitacao->resposta_tutor = 'recusada';
+            $solicitacao->save();
+        } 
+
+        return redirect()->route('tutorNotifi')->with('notif', 'Resposta enviada ao aluno com sucesso!');       
+        
+    }
+
+
+
+
+
+
 }
