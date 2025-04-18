@@ -71,13 +71,60 @@ class AlunoController extends Controller
             $query->where('resposta_tutor', 'aceite')
                 ->orWhere('resposta_tutor', 'recusada');
         })
-        ->orderBy('created_at', 'desc')
+        ->where('estado_aluno', 'não lida')
+        ->orderBy('updated_at', 'desc')
         ->get();
 
         
-        $pag = 'naoAceite';
+        $pag = 'naoLida';
 
         return view('aluno/notificacao', compact('solicitacoes', 'pag'));
         
+    }
+
+    public function notificacaoLida()
+    {
+        $id = Auth::id();
+        $aluno = Aluno::where('id_user', $id)->value('id');
+
+        $solicitacoes = Solicitacao::with('tutor.perfil_especialidade.especialidade')
+        ->with('aluno')
+        ->where('id_aluno', $aluno)
+        ->where('estado_aluno', 'lida')
+        ->orderBy('updated_at', 'desc') // ordena do mais recente para o mais antigo
+        ->get();
+
+        $pag = 'lida';
+
+        return view('aluno/notificacao', compact('solicitacoes', 'pag'));
+    }
+
+
+    public function confirmNotifi(Request $rqt)
+    {
+         /* metodo para confirmar do aluno solicitações */
+        
+         $id = $rqt->input('id_solici');
+         $op = $rqt->input('op');
+ 
+         //atualizar o estado do aluno
+         if ($op == 'ok') {
+ 
+             $solicitacao = Solicitacao::find($id);
+             $solicitacao->estado_aluno = 'lida';
+             $solicitacao->save();
+             return redirect()->route('alunoNotifi')->with('notif', 'Notificação marcada como lida!');
+ 
+         } elseif ($op == 'excluir' || $op == 'excluir2') {//excluir solicitação
+ 
+             $solicitacao = Solicitacao::find($id);
+             $solicitacao->delete();
+             if ($op == 'excluir') {
+                return redirect()->route('alunoNotifi')->with('notif', 'Notificação excluida com sucesso!');
+             } else {
+                return redirect()->route('alunoNotifiLida')->with('notif', 'Notificação excluida com sucesso!');
+             }
+             
+         } 
     }
 }

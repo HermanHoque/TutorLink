@@ -32,7 +32,7 @@ Route::middleware(['checkAuth'])->group(function () {
     Route::get('home_tutor', [TutorController::class, 'home'])->name('tutorHome');
     Route::get('perfil_tutor', [TutorController::class, 'perfil'])->name('tutorPerfil');
     Route::get('notificação_tutor', [TutorController::class, 'notificacao'])->name('tutorNotifi');
-    Route::get('notificação_Aceite', [TutorController::class, 'notificacaoAceite'])->name('tutorNotifiAceite');
+    Route::get('notificaçãoAceite_tutor', [TutorController::class, 'notificacaoAceite'])->name('tutorNotifiAceite');
     Route::view("mensagens_tutor", "tutor/msg")->name("tutorMsg");
     Route::post('resposta', [TutorController::class, 'respostaSolici'])->name('resposta');
     Route::post('perfil_specialty', [EspecialidadeController::class, 'perfil_specialty'])->name('perfilSpecialty'); 
@@ -45,6 +45,8 @@ Route::middleware(['checkAuth'])->group(function () {
     Route::match(['post', 'get'],'detalhes/{uuid}', [AlunoController::class, 'detalhes'])->name('detalhes');
     Route::post('solicitar_aluna', [AlunoController::class, 'solicitacao'])->name('solicitacao');
     Route::get('notificação_aluno', [AlunoController::class, 'notificacao'])->name('alunoNotifi');
+    Route::get('notificaçãoLida_aluno', [AlunoController::class, 'notificacaoLida'])->name('alunoNotifiLida');
+    Route::match(['post', 'delete'], 'confirm_notificação', [AlunoController::class, 'confirmNotifi'])->name('confirmNotifi');
     Route::view("mensagens_aluno", "aluno/msg")->name("alunoMsg");
         
 });

@@ -8,15 +8,27 @@
             <strong>Notificações</strong>
         </div>
     </div>
-    <hr id="tracoHeader">   
+    <hr id="tracoHeader">
+    
+    @if ($msg = Session::get("notif"))
+
+		<div class="alert alert-primary alert-dismissible fade show position-fixed top-0 end-0 m-3 z-3" role="alert">
+			<strong>
+				<i class="bi bi-check-square-fill"></i>
+				{{$msg}}
+			</strong>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		
+	@endif
 
     <div style="margin-top: 20px;">
       <ul class="nav nav-tabs" id="navTabs">
         <li class="nav-item">
-          <a class="nav-link active" href="#" style="color: #3C4049">Não Lidas</a>
+          <a class="nav-link active" href="{{ route('alunoNotifi') }}" style="color: #3C4049">Não Lidas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" style="color: #3C4049">Lidas</a>
+          <a class="nav-link" href="{{ route('alunoNotifiLida') }}" style="color: #3C4049">Lidas</a>
         </li>
       </ul>
     </div>
@@ -26,7 +38,7 @@
   <div class="container">
     
     @foreach ($solicitacoes as $s)
-        <div class="cardNotifi">
+        <div class="cardNotifi position-relative p-3 mb-3">
             <div style="padding: 10px;">
                 <div class="d-flex align-items-center">
                   @empty($s->tytor->foto_tutor){{-- foto --}}
@@ -48,10 +60,11 @@
                     
                     <div class="row g-2" style="margin-top: 5px;">
                         <div class="col-auto">
-                            <form action="">
+                            <form action="{{ route('confirmNotifi') }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta notificação?');">
                                 @csrf
+                                @method('DELETE')
                                 <input type="hidden" name="id_solici" value="{{$s->id}}">
-                                <input type="hidden" name="rp" value="recusada">
+                                <input type="hidden" name="op" value="excluir2">
                                 <button type="submit" class="btn btn-danger btn-sm">
                                     <i class="bi bi-x-circle"></i> Excluir notificação
                                 </button>
@@ -63,10 +76,10 @@
 
                 <div class="row g-2" style="margin-top: 5px;">
                     <div class="col-auto">
-                        <form action="">
+                        <form action="{{ route('confirmNotifi') }}" method="POST">
                             @csrf
                             <input type="hidden" name="id_solici" value="{{$s->id}}">
-                            <input type="hidden" name="rp" value="ok">
+                            <input type="hidden" name="op" value="ok">
                             <button type="submit" class="btn btn-outline-secondary btn-sm">
                                 <i class="bi bi-check-circle"></i> OK
                             </button>
@@ -74,10 +87,11 @@
                     </div>
 
                     <div class="col-auto">
-                        <form action="">
+                        <form action="{{ route('confirmNotifi') }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta notificação?');">
                             @csrf
+                            @method('DELETE')
                             <input type="hidden" name="id_solici" value="{{$s->id}}">
-                            <input type="hidden" name="rp" value="excluir">
+                            <input type="hidden" name="op" value="excluir">
                             <button type="submit" class="btn btn-danger btn-sm">
                                 <i class="bi bi-x-circle"></i> Excluir
                             </button>
@@ -86,7 +100,11 @@
                 </div>
                 
                 @endif
-
+            </div>
+            
+            <!-- Data no canto inferior direito -->
+            <div class="position-absolute bottom-0 end-0 me-2 mb-2 text-muted" style="font-size: 0.9rem;">
+                {{ $s->updated_at->format('Y/m/d') }}
             </div>
         </div>
     @endforeach
