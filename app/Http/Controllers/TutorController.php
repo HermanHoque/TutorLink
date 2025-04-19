@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Especialidade;
 use App\Models\Perfil_especialidade;
+use App\Models\Pf_especialidade_aluno;
 use App\Models\Solicitacao;
 use App\Models\Tutor;
 use Illuminate\Http\Request;
@@ -84,6 +85,8 @@ class TutorController extends Controller
         /* metodo para responder solicitações */
         
         $id = $rqt->input('id_solici');
+        $id_aluno = $rqt->input('id_aluno');
+        $id_pf_especialidade = $rqt->input('id_pf_especialidade');
         $resposta = $rqt->input('rp');
 
         //atualizar a resposta do tutor
@@ -92,6 +95,9 @@ class TutorController extends Controller
             $solicitacao = Solicitacao::find($id);
             $solicitacao->resposta_tutor = 'aceite';
             $solicitacao->save();
+
+            //criar a relação do aluno e o perfil esp...
+            Pf_especialidade_aluno::create(['id_pf_especialidade'=>$id_pf_especialidade, 'id_aluno'=>$id_aluno]);
 
         } elseif ($resposta == 'recusada') {
 
@@ -102,6 +108,15 @@ class TutorController extends Controller
 
         return redirect()->route('tutorNotifi')->with('notif', 'Resposta enviada ao aluno com sucesso!');       
         
+    }
+
+
+    public function deleteNotifi(Request $rqt)
+    {
+        $id = $rqt->input('id_solici');
+        $solicitacao = Solicitacao::find($id);
+        $solicitacao->delete();
+        return redirect()->route('tutorNotifiAceite')->with('notif', 'Notificação excluida com sucesso!');
     }
 
 

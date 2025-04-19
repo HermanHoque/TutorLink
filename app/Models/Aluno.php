@@ -16,6 +16,8 @@ class Aluno extends Model
         "id_user",
     ];
 
+    protected $table = "aluno";
+
     protected static function booted()
     {
         static::creating(function ($aluno) {
@@ -28,6 +30,11 @@ class Aluno extends Model
         // um para muitos
         return $this->hasMany(Solicitacao::class, 'id_aluno', 'id');
     }
+
+    public function pf_especialidade_aluno()
+    {
+        // um para muitos
+        return $this->hasMany(Pf_especialidade_aluno::class, 'id_aluno', 'id');
+    }
     
-    protected $table = "aluno";
 }

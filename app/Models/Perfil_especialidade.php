@@ -33,4 +33,10 @@ class Perfil_especialidade extends Model
         // um para muitos
         return $this->hasMany(Solicitacao::class, 'id_perfil_especialidade', 'id');
     }
+
+    public function pf_especialidade_aluno()
+    {
+        // um para muitos
+        return $this->hasMany(Pf_especialidade_aluno::class, 'id_pf_especialidade', 'id');
+    }
 }

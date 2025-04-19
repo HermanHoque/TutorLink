@@ -93,27 +93,46 @@
         </div>
 
         <div class="row align-items-center">
-            @for ($i = 1; $i <= 3; $i++)
+            @empty($perfil_esps->count())
+            
+                <div class="text-center">
+                    <img src="{{ asset('img/ask_11049522.png') }}" style="width: 200px; height: 200px;" alt="vazio"><br>
+                    <span><strong>Não há perfis para mostrar no momento!</strong></span>
+                </div>
+
+            @else       
+            @foreach ($perfil_esps as $p_esp)
             <div class="col" style="padding-top: 20px">
                 <div class="container">
                   <div class="card shadow-sm p-3">
                         <div id="card-body">
                             <div class="">
                                 <div>{{-- info tutor --}}
-                                    <h5 class="mb-0"><strong>Progamação WEB</strong></h5>
+                                    <h5 class="mb-0"><strong>{{$p_esp->perfil_especialidade->especialidade->nome}}</strong></h5>
                                     <hr>
                                 </div>
                             </div>
                             {{-- sobre a aula --}}
-                            <strong>Tutor:</strong>  Eren Yeger <br>
+                            <strong>Tutor:</strong>  {{$p_esp->perfil_especialidade->tutor->nome_tutor}} <br>
                             <div style="padding-bottom: 5px"></div>
-                            <strong>Telefone:</strong> 934 999 888 <br>
+                            <strong>Telefone:</strong> {{$p_esp->perfil_especialidade->tutor->telefone_tutor}} <br>
                             <div style="padding-bottom: 5px"></div>
-                            <strong>Tipo de aula:</strong> Particular <br>
+                            <strong>Tipo de aula:</strong>
+                            @if ($p_esp->perfil_especialidade->tipo == 1)
+                                Coletiva
+                                <br>
+                                <div style="padding-bottom: 5px"></div>
+                                <strong>Nº de alunos:</strong> {{$p_esp->perfil_especialidade->pf_especialidade_aluno_count}}/{{$p_esp->perfil_especialidade->num_aluno}} <br>
+                            @else
+                                Particular
+                                <br>
+                                <div style="padding-bottom: 5px"></div>
+                                <strong>Nº de alunos:</strong> {{$p_esp->perfil_especialidade->num_aluno}} <br>
+                            @endif 
                             <div style="padding-bottom: 5px"></div>
-                            <strong>Custo:</strong> 0 <br>
+                            <strong>Custo:</strong> {{$p_esp->perfil_especialidade->custo}} <br>
                             <div style="padding-bottom: 5px"></div>
-                            <p class="text-muted small"> é o processo de desenvolvimento de sites e aplicações acessíveis por meio de navegadores. Ela envolve tecnologias como HTML (estrutura da página), CSS (estilização) e JavaScript (interatividade). No backend, linguagens como PHP, Python, Node.js e Ruby são usadas para processar dados e gerenciar bancos de dados.</p>
+                            <p class="text-muted small"> {{$p_esp->perfil_especialidade->detalhes}}</p>
                         </div>
                     
                         <div class="card-footer d-flex gap-2">
@@ -123,7 +142,8 @@
                     </div>
                 </div>
         </div>
-        @endfor
+        @endforeach
+        @endempty
     </div>
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aluno;
 use App\Models\Perfil_especialidade;
+use App\Models\Pf_especialidade_aluno;
 use App\Models\Solicitacao;
 use App\Models\Tutor;
 use Illuminate\Http\Request;
@@ -18,9 +19,19 @@ class AlunoController extends Controller
         $id = Auth::id();
         $aluno = Aluno::where('id_user', $id)->first();
 
-        $solicitacoes = Solicitacao::with('tutor')->where('id_aluno', $aluno['id'])->where('resposta_tutor', 'em espera')->get();
+        $solicitacoes = Solicitacao::with('tutor')
+        ->where('id_aluno', $aluno['id'])->where('resposta_tutor', 'em espera')->get();
+
+        $perfil_esps = Pf_especialidade_aluno::with('aluno')
+        ->with(['perfil_especialidade' => function ($query) {
+            $query->with('especialidade')
+            ->with('tutor')
+            ->withCount('pf_especialidade_aluno');//contar quantos alunos tem um perfil esp...
+        }])
+        ->where('id_aluno', $aluno['id']) 
+        ->get();
         
-        return view('aluno/perfil', compact('aluno', 'solicitacoes'));
+        return view('aluno/perfil', compact('aluno', 'solicitacoes', 'perfil_esps'));
     }
 
 

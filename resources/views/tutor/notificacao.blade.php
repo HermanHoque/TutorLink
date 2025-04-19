@@ -40,7 +40,7 @@
         <div class="cardNotifi position-relative p-3 mb-3" style="border: 1px solid #ccc; border-radius: 10px;">
             <div style="padding: 10px;">
                 <div class="d-flex align-items-center">
-                    @empty($aluno->foto_aluno){{-- foto --}}
+                    @empty($s->aluno->foto_aluno){{-- foto --}}
                         <img src="{{ asset('img/school_16658380.png') }}" alt="Foto de perfil" class="perfil_foto" style="width: 50px; height: 50px;">
                     @else
                         <img src="{{ asset('img/23.jpg') }}" class="profile-pic" alt="Foto de perfil">
@@ -59,14 +59,14 @@
                 <p><strong>Nível Académico:</strong> {{$s->aluno->nivel_academico}}</p>
                 <p><strong>Telefone:</strong> {{$s->aluno->telefone_aluno}}</p>
 
-                @if ($pag == 'aceite')
+                @if ($pag == 'aceite') 
                     
                     <div class="row g-2" style="margin-top: 5px;">
                         <div class="col-auto">
-                            <form action="{{ route('resposta') }}" method="POST">
+                            <form action="{{ route('deleteNotifi') }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta notificação?');">
                                 @csrf
+                                @method('DELETE')
                                 <input type="hidden" name="id_solici" value="{{$s->id}}">
-                                <input type="hidden" name="rp" value="recusada">
                                 <button type="submit" class="btn btn-danger btn-sm">
                                     <i class="bi bi-x-circle"></i> Excluir notificação
                                 </button>
@@ -80,6 +80,8 @@
                         <form action="{{ route('resposta') }}" method="POST">
                             @csrf
                             <input type="hidden" name="id_solici" value="{{$s->id}}">
+                            <input type="hidden" name="id_pf_especialidade" value="{{$s->id_perfil_especialidade}}">
+                            <input type="hidden" name="id_aluno" value="{{$s->aluno->id}}">
                             <input type="hidden" name="rp" value="aceite">
                             <button type="submit" class="btn btn-outline-secondary btn-sm">
                                 <i class="bi bi-check-circle"></i> Aceitar

@@ -32,6 +32,7 @@ Route::middleware(['checkAuth'])->group(function () {
     Route::get('home_tutor', [TutorController::class, 'home'])->name('tutorHome');
     Route::get('perfil_tutor', [TutorController::class, 'perfil'])->name('tutorPerfil');
     Route::get('notificação_tutor', [TutorController::class, 'notificacao'])->name('tutorNotifi');
+    Route::get('deleteNotificação_tutor', [TutorController::class, 'deleteNotifi'])->name('deleteNotifi');
     Route::get('notificaçãoAceite_tutor', [TutorController::class, 'notificacaoAceite'])->name('tutorNotifiAceite');
     Route::view("mensagens_tutor", "tutor/msg")->name("tutorMsg");
     Route::post('resposta', [TutorController::class, 'respostaSolici'])->name('resposta');

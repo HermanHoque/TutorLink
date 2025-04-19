@@ -58,7 +58,7 @@
 
                 @if ($pag == 'lida')
                     
-                    <div class="row g-2" style="margin-top: 5px;">
+                    {{-- <div class="row g-2" style="margin-top: 5px;">
                         <div class="col-auto">
                             <form action="{{ route('confirmNotifi') }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta notificação?');">
                                 @csrf
@@ -70,7 +70,7 @@
                                 </button>
                             </form>
                         </div>
-                    </div>
+                    </div> --}}
 
                 @else
 
