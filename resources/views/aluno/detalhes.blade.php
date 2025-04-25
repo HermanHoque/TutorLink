@@ -20,6 +20,18 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
   
+    @endif 
+    
+    @if ($msg = Session::get("notif2"))
+
+        <div class="alert alert-danger alert-dismissible fade show position-fixed top-0 end-0 m-3 z-3" role="alert">
+            <strong>
+                <i class="bi bi-x-square-fill"></i>
+                {{$msg}}
+            </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+  
     @endif
 
 
@@ -124,7 +136,7 @@
                                 Coletiva
                                 <br>
                                 <div style="padding-bottom: 5px"></div>
-                                <strong>Nº de alunos:</strong> 0/{{$perfil_esp->num_aluno}} <br>
+                                <strong>Nº de alunos:</strong> {{$perfil_esp->pf_especialidade_aluno_count}}/{{$perfil_esp->num_aluno}} <br>
                             @else
                                 Particular
                                 <br>
@@ -145,6 +157,8 @@
                                 <input type="hidden" name="id_tutor" value="{{$perfil_esp->id_tutor}}">
                                 <input type="hidden" name="uuid_tutor" value="{{$tutor->uuid_tutor}}">
                                 <input type="hidden" name="id_aluno" value="{{$id_aluno}}">
+                                <input type="hidden" name="num_aluno" value="{{$perfil_esp->num_aluno}}">
+                                <input type="hidden" name="tipo_aula" value="{{$perfil_esp->tipo}}">
                                 <button type="submit" class="btn btn-outline-secondary w-100">
                                     <i class="bi bi-bell"></i>
                                     Solicitar Aula

@@ -140,7 +140,7 @@
                                 Coletiva
                                 <br>
                                 <div style="padding-bottom: 5px"></div>
-                                <strong>Nº de alunos:</strong> 0/{{$perfil_esp->num_aluno}} <br>
+                                <strong>Nº de alunos:</strong> {{$perfil_esp->pf_especialidade_aluno_count}}/{{$perfil_esp->num_aluno}} <br>
                             @else
                                 Particular
                                 <br>
