@@ -24,7 +24,7 @@ class TutorController extends Controller
         $id = Auth::id();
         $tutor = Tutor::where('id_user', $id)->first();
         $especialidades = Especialidade::all();
-        
+
         //pegar perfis de especialidades de um tutor
         $perfil_esps = Perfil_especialidade::with('especialidade', 'tutor')
         ->withCount('pf_especialidade_aluno') // conta os alunos ligados a esse perfil
@@ -40,8 +40,12 @@ class TutorController extends Controller
 
         $id = Auth::id();
         $tutor = Tutor::where('id_user', $id)->first();
+        
         //pegar perfis de especialidades de um tutor
-        $perfil_esps = Perfil_Especialidade::with('especialidade')->where('id_tutor', $tutor['id'])->get();
+        $perfil_esps = Perfil_especialidade::with('especialidade', 'tutor')
+        ->withCount('pf_especialidade_aluno') // conta os alunos ligados a esse perfil
+        ->where('id_tutor', $tutor['id'])     // filtra pelo tutor específico
+        ->get();
         
         return view('tutor/home', compact('perfil_esps'));
     }

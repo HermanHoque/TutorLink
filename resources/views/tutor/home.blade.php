@@ -71,17 +71,20 @@
                             </div>
                         </div>
                         {{-- sobre a aula --}}
-                        <strong>Tipo de aula:</strong>  
-                        @if ($perfil_esp->tipo == 1)
-                            Coletiva
-                        @else
-                            Particular
-                        @endif 
-                        <br>
+                        <strong>Tipo de aula:</strong> 
+                            @if ($perfil_esp->tipo == 1)
+                                Coletiva
+                                <br>
+                                <div style="padding-bottom: 5px"></div>
+                                <strong>Nº de alunos:</strong> {{$perfil_esp->pf_especialidade_aluno_count}}/{{$perfil_esp->num_aluno}} <br>
+                            @else
+                                Particular
+                                <br>
+                               <div style="padding-bottom: 5px"></div>
+                               <strong>Nº de alunos:</strong> {{$perfil_esp->num_aluno}} <br>
+                            @endif 
                         <div style="padding-bottom: 5px"></div>
-                        <strong>Nº de alunos:</strong> {{$perfil_esp->num_aluno}} <br>
-                        <div style="padding-bottom: 5px"></div>
-                        <strong>Custo:</strong> {{$perfil_esp->custo}} <br>
+                        <strong>Custo:</strong> {{$perfil_esp->custo}} Kz<br>
                         <div style="padding-bottom: 5px"></div>
                         <p class="text-muted small"> {{$perfil_esp->descricao}}</p>
                     </div>
