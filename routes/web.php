@@ -26,13 +26,19 @@ Route::get('logout', [UserController::class, 'logout'])->name('logout');
 /* rota para o tipo de usuário */
 Route::get('user_type', [UserController::class, 'userType'])->name('userType');
 
+/*rotas comuns*/
+Route::middleware(['checkAuth'])->group(function () {
+    Route::delete('delete_All', [UserController::class, 'deleteAll'])->name('deleteAll');
+    
+});
+
 
 /* outras rotas do user Tutor*/
 Route::middleware(['checkAuth'])->group(function () {
     Route::get('home_tutor', [TutorController::class, 'home'])->name('tutorHome');
     Route::get('perfil_tutor', [TutorController::class, 'perfil'])->name('tutorPerfil');
     Route::get('notificação_tutor', [TutorController::class, 'notificacao'])->name('tutorNotifi');
-    Route::get('deleteNotificação_tutor', [TutorController::class, 'deleteNotifi'])->name('deleteNotifi');
+    Route::delete('deleteNotificação_tutor', [TutorController::class, 'deleteNotifi'])->name('deleteNotifi');
     Route::get('notificaçãoAceite_tutor', [TutorController::class, 'notificacaoAceite'])->name('tutorNotifiAceite');
     Route::view("mensagens_tutor", "tutor/msg")->name("tutorMsg");
     Route::post('resposta', [TutorController::class, 'respostaSolici'])->name('resposta');

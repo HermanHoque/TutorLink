@@ -116,11 +116,11 @@ class AlunoController extends Controller
     {
 
         $id = Auth::id();
-        $aluno = Aluno::where('id_user', $id)->value('id');
+        $id_aluno = Aluno::where('id_user', $id)->value('id');
 
         $solicitacoes = Solicitacao::with('tutor.perfil_especialidade.especialidade')
         ->with('aluno')
-        ->where('id_aluno', $aluno)
+        ->where('id_aluno', $id_aluno)
         ->where(function ($query) {
             $query->where('resposta_tutor', 'aceite')
                 ->orWhere('resposta_tutor', 'recusada');
@@ -132,31 +132,31 @@ class AlunoController extends Controller
         
         $pag = 'naoLida';
 
-        return view('aluno/notificacao', compact('solicitacoes', 'pag'));
+        return view('aluno/notificacao', compact('solicitacoes', 'pag', 'id_aluno'));
         
     }
 
     public function notificacaoLida()
     {
         $id = Auth::id();
-        $aluno = Aluno::where('id_user', $id)->value('id');
+        $id_aluno = Aluno::where('id_user', $id)->value('id');
 
         $solicitacoes = Solicitacao::with('tutor.perfil_especialidade.especialidade')
         ->with('aluno')
-        ->where('id_aluno', $aluno)
+        ->where('id_aluno', $id_aluno)
         ->where('estado_aluno', 'lida')
         ->orderBy('updated_at', 'desc') // ordena do mais recente para o mais antigo
         ->get();
 
         $pag = 'lida';
 
-        return view('aluno/notificacao', compact('solicitacoes', 'pag'));
+        return view('aluno/notificacao', compact('solicitacoes', 'pag', 'id_aluno'));
     }
 
 
+    /* metodo para atualizar o estado e excluir solicitações do aluno */
     public function confirmNotifi(Request $rqt)
     {
-         /* metodo para confirmar do aluno solicitações */
         
          $id = $rqt->input('id_solici');
          $op = $rqt->input('op');
@@ -168,11 +168,13 @@ class AlunoController extends Controller
              $solicitacao->estado_aluno = 'lida';
              $solicitacao->save();
              return redirect()->route('alunoNotifi')->with('notif', 'Notificação marcada como lida!');
- 
-         } elseif ($op == 'excluir' || $op == 'excluir2') {//excluir solicitação
+             
+             //excluir solicitação
+            } elseif ($op == 'excluir' || $op == 'excluir2') {
  
              $solicitacao = Solicitacao::find($id);
-             $solicitacao->delete();
+             $solicitacao->estado_aluno = 'deletado';
+             $solicitacao->save();
              if ($op == 'excluir') {
                 return redirect()->route('alunoNotifi')->with('notif', 'Notificação excluida com sucesso!');
              } else {

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("resposta_tutor", 10)->nullable(false)->default("em espera");
             $table->string("estado_aluno", 10)->nullable(false)->default("não lida");
+            $table->string("estado_tutor", 10)->nullable(false)->default("não lida");
 
             $table->unsignedBigInteger("id_perfil_especialidade");
             $table->foreign("id_perfil_especialidade")->references("id")->on("perfil_especialidade")->onDelete("cascade")->onUpdate("cascade");

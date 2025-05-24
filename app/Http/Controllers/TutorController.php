@@ -50,47 +50,50 @@ class TutorController extends Controller
         return view('tutor/home', compact('perfil_esps'));
     }
 
+    /* metodo para pagina de notificação não lida*/
     public function notificacao()
     {
-        /* metodo para pagina de notificação */
 
         $id = Auth::id();
-        $tutor = Tutor::where('id_user', $id)->value('id');
+        $id_tutor = Tutor::where('id_user', $id)->value('id');
 
         $solicitacoes = Solicitacao::with('tutor.perfil_especialidade.especialidade')
         ->with('aluno')
-        ->where('id_tutor', $tutor)
+        ->where('id_tutor', $id_tutor)
         ->where('resposta_tutor', 'em espera')
+        ->where('estado_tutor', 'não lida')
         ->orderBy('created_at', 'desc') // ordena do mais recente para o mais antigo
         ->get();
         $pag = 'naoAceite';
 
-        return view('tutor/notificacao', compact('solicitacoes', 'pag'));
+        return view('tutor/notificacao', compact('solicitacoes', 'pag', 'id_tutor'));
         
     }
 
+
+    /* metodo para pagina de notificações Aceites */
     public function notificacaoAceite()
     {
-        /* metodo para pagina de notificaçãoAceite */
         
         $id = Auth::id();
-        $tutor = Tutor::where('id_user', $id)->value('id');
+        $id_tutor = Tutor::where('id_user', $id)->value('id');
 
         $solicitacoes = Solicitacao::with('tutor.perfil_especialidade.especialidade')
         ->with('aluno')
-        ->where('id_tutor', $tutor)
+        ->where('id_tutor', $id_tutor)
         ->where('resposta_tutor', 'aceite')
+        ->where('estado_tutor', 'lida')
         ->orderBy('created_at', 'desc') // ordena do mais recente para o mais antigo
         ->get();
         $pag = 'aceite';
 
-        return view('tutor/notificacao', compact('solicitacoes', 'pag'));
+        return view('tutor/notificacao', compact('solicitacoes', 'pag', 'id_tutor'));
         
     }
 
+    /* metodo para responder solicitações */
     public function respostaSolici(Request $rqt)
     {
-        /* metodo para responder solicitações */
         
         $id = $rqt->input('id_solici');
         $id_aluno = $rqt->input('id_aluno');
@@ -102,6 +105,7 @@ class TutorController extends Controller
 
             $solicitacao = Solicitacao::find($id);
             $solicitacao->resposta_tutor = 'aceite';
+            $solicitacao->estado_tutor = 'lida';
             $solicitacao->save();
 
             //criar a relação do aluno e o perfil esp...
@@ -111,6 +115,7 @@ class TutorController extends Controller
 
             $solicitacao = Solicitacao::find($id);
             $solicitacao->resposta_tutor = 'recusada';
+            $solicitacao->estado_tutor = 'deletado';
             $solicitacao->save();
         } 
 
@@ -123,7 +128,9 @@ class TutorController extends Controller
     {
         $id = $rqt->input('id_solici');
         $solicitacao = Solicitacao::find($id);
-        $solicitacao->delete();
+        $solicitacao->estado_tutor = 'deletado';
+        $solicitacao->save();
+        /* $solicitacao->delete(); */
         return redirect()->route('tutorNotifiAceite')->with('notif', 'Notificação excluida com sucesso!');
     }
 

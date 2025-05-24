@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Solicitacao;
 use App\Models\User;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -40,7 +41,7 @@ class UserController extends Controller
         }else {
             return redirect()->back()->with('erro',' Email ou Password inválida!');
         } 
-        echo var_dump($credenciais);
+        /* echo var_dump($credenciais); */
     }
 
 
@@ -55,6 +56,47 @@ class UserController extends Controller
         $rqt->session()->regenerateToken();
     
         return redirect()->route('loginPage');
+    }
+
+
+    public function deleteAll(Request $rqt)
+    {
+        $perfil = $rqt->input('perfil');
+        $pag = $rqt->input('pag');
+        $id = $rqt->input('id');
+
+        if ($perfil == "tutor") {
+            
+            if ($pag == "aceite") {
+                Solicitacao::query()->where('id_tutor', $id)
+                ->where('resposta_tutor', 'aceite')
+                ->update(['estado_tutor' => 'deletado']);
+                return redirect()->route('tutorNotifiAceite')->with('notif', 'Notificação excluida com sucesso!');
+            } else {
+                Solicitacao::query()->where('id_tutor', $id)
+                ->where('resposta_tutor', 'em espera')
+                ->update(
+                    ['resposta_tutor' => 'recusada'],
+                    ['estado_tutor' => 'deletado']
+                );
+                return redirect()->route('tutorNotifi')->with('notif', 'Notificação excluida com sucesso!');
+            }
+            
+        } elseif ($perfil == "aluno") {
+            if ($pag == "lida") {
+                Solicitacao::query()->where('id_aluno', $id)
+                ->where('estado_aluno', 'lida')
+                ->update(['estado_aluno' => 'deletado']);
+                return redirect()->route('alunoNotifiLida')->with('notif', 'Notificação excluida com sucesso!');
+            } else {
+                Solicitacao::query()->where('id_aluno', $id)
+                ->where('estado_aluno', 'não lida')
+                ->update(['estado_aluno' => 'deletado']);
+                return redirect()->route('alunoNotifi')->with('notif', 'Notificação excluida com sucesso!');
+            }
+        } 
+
+        /* $solicitacao->delete(); */
     }
 
    

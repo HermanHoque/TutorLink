@@ -59,6 +59,7 @@
                 <p><strong>Nível Académico:</strong> {{$s->aluno->nivel_academico}}</p>
                 <p><strong>Telefone:</strong> {{$s->aluno->telefone_aluno}}</p>
 
+                {{-- pagina aceite --}}
                 @if ($pag == 'aceite') 
                     
                     <div class="row g-2" style="margin-top: 5px;">
@@ -75,6 +76,7 @@
                     </div>
 
                 @else
+                {{-- pagina não aceite --}}
                 <div class="row g-2" style="margin-top: 5px;">
                     <div class="col-auto">
                         <form action="{{ route('resposta') }}" method="POST">
@@ -115,9 +117,16 @@
 
 
  <!-- Botão flutuante -->
- <button class="btn btn-danger position-fixed  top-0 end-0 m-3 rounded-circle shadow">
-    <i class="bi bi-trash"></i> <!-- Ícone opcional -->
-</button>
+ <form action="{{ route('deleteAll') }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta notificação?');">
+    @csrf
+    @method('DELETE')
+    <input type="hidden" name="perfil" value="tutor">
+    <input type="hidden" name="pag" value="{{$pag}}">
+    <input type="hidden" name="id" value="{{$id_tutor}}">
+     <button type="submit" class="btn btn-danger position-fixed  top-0 end-0 m-3 rounded-circle shadow">
+        <i class="bi bi-trash"></i> <!-- Ícone opcional -->
+     </button>
+ </form>
 
 
 

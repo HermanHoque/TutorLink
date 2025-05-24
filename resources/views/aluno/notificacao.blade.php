@@ -112,9 +112,16 @@
 </div>
 
  <!-- Botão flutuante -->
- <button class="btn btn-danger position-fixed  top-0 end-0 m-3 rounded-circle shadow">
-    <i class="bi bi-trash"></i> <!-- Ícone opcional -->
-</button>
+ <form action="{{ route('deleteAll') }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta notificação?');">
+    @csrf
+    @method('DELETE')
+    <input type="hidden" name="perfil" value="aluno">
+    <input type="hidden" name="pag" value="{{$pag}}">
+    <input type="hidden" name="id" value="{{$id_aluno}}">
+     <button type="submit" class="btn btn-danger position-fixed  top-0 end-0 m-3 rounded-circle shadow">
+        <i class="bi bi-trash"></i> <!-- Ícone opcional -->
+     </button>
+ </form>
 
 
 
