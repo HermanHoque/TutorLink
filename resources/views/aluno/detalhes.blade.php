@@ -172,5 +172,7 @@
         @endempty
     </div>
 
+    @include('aluno/pagination', ['paginator' => $perfil_esps])
+
 </div>
 @endsection

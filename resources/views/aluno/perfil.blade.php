@@ -144,6 +144,8 @@
         </div>
         @endforeach
         @endempty
+
+        @include('aluno/pagination', ['paginator' => $perfil_esps])
     </div>
 
 

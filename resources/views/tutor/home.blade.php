@@ -103,6 +103,8 @@
        
     </div>
 
+    @include('tutor/pagination', ['paginator' => $perfil_esps])
+
 
 </div>
 @endsection

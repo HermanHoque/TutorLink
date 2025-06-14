@@ -17,9 +17,10 @@ class TutorController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    /* metodo para pagina de perfil */
     public function perfil()
     {
-        /* metodo para pagina de perfil */
         
         $id = Auth::id();
         $tutor = Tutor::where('id_user', $id)->first();
@@ -27,9 +28,9 @@ class TutorController extends Controller
 
         //pegar perfis de especialidades de um tutor
         $perfil_esps = Perfil_especialidade::with('especialidade', 'tutor')
-        ->withCount('pf_especialidade_aluno') // conta os alunos ligados a esse perfil
+        ->withCount('pf_especialidade_aluno') // conta os alunos ligados a um perfil
         ->where('id_tutor', $tutor['id'])     // filtra pelo tutor específico
-        ->get();
+        ->paginate(3);
         
         return view('tutor/perfil', compact('tutor', 'especialidades', 'perfil_esps'));
     }
@@ -45,7 +46,7 @@ class TutorController extends Controller
         $perfil_esps = Perfil_especialidade::with('especialidade', 'tutor')
         ->withCount('pf_especialidade_aluno') // conta os alunos ligados a esse perfil
         ->where('id_tutor', $tutor['id'])     // filtra pelo tutor específico
-        ->get();
+        ->paginate(3);
         
         return view('tutor/home', compact('perfil_esps'));
     }

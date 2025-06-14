@@ -108,6 +108,8 @@
             </div>
             @endforeach
         </div>
+
+        @include('aluno/home_pagination', ['paginator' => $tutores])
         
   </div>
   

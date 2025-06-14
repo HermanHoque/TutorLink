@@ -125,7 +125,7 @@
             @else        
             @foreach ($perfil_esps as $perfil_esp)
             <div class="col" style="padding-top: 20px">
-                <div class="container">
+                <div class="container"> 
                   <div class="card shadow-sm p-3">
                         <div id="card-body">
                             <div class="">
@@ -166,6 +166,9 @@
             @endempty
            
         </div>
+
+        @include('tutor/pagination', ['paginator' => $perfil_esps])
+
 
 </div>
 <script>

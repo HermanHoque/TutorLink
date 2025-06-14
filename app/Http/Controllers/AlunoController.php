@@ -25,12 +25,12 @@ class AlunoController extends Controller
 
         $perfil_esps = Pf_especialidade_aluno::with('aluno')
         ->with(['perfil_especialidade' => function ($query) {
-            $query->with('especialidade')
+            $query->with('especialidade') 
             ->with('tutor')
             ->withCount('pf_especialidade_aluno');//contar quantos alunos tem um perfil esp...
         }])
         ->where('id_aluno', $aluno['id']) 
-        ->get();
+        ->paginate(3);
         
         return view('aluno/perfil', compact('aluno', 'solicitacoes', 'perfil_esps'));
     }
@@ -40,7 +40,7 @@ class AlunoController extends Controller
     {
         /* metodo para pagina home */
         
-        $tutores = Tutor::where('estado', 'on')->get();
+        $tutores = Tutor::where('estado', 'on')->paginate(6);
         //echo var_dump($tutores);
         return view('aluno/home', compact('tutores'));
     }
@@ -59,7 +59,7 @@ class AlunoController extends Controller
         $perfil_esps = Perfil_especialidade::with('especialidade', 'tutor')
         ->withCount('pf_especialidade_aluno') // conta os alunos ligados a esse perfil
         ->where('id_tutor', $tutor['id'])     // filtra pelo tutor específico
-        ->get();
+        ->paginate(3);
 
         return view('aluno/detalhes', compact('tutor', 'id_aluno', 'perfil_esps'));
     }
