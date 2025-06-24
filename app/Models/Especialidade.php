@@ -18,4 +18,10 @@ class Especialidade extends Model
         // um para muitos
         return $this->hasMany(Perfil_especialidade::class, 'id_especialidade', 'id');
     }
+
+    public function tutor_esp()
+    {
+        // um para muitos
+        return $this->hasMany(Tutor_especialidade::class, 'id_especialidade', 'id');
+    }
 }

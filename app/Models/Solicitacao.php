@@ -14,6 +14,7 @@ class Solicitacao extends Model
         "id_tutor",
         "id_aluno"
     ];
+    protected $table = "solicitacao";
     
     public function aluno()
     {
@@ -32,5 +33,4 @@ class Solicitacao extends Model
         //muitos para um
         return $this->belongsTo(Perfil_especialidade::class, 'id_perfil_especialidade');
     }
-    protected $table = "solicitacao";
 }

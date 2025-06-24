@@ -36,9 +36,9 @@ class AlunoController extends Controller
     }
 
 
+    /* metodo para pagina home */
     public function home()
     {
-        /* metodo para pagina home */
         
         $tutores = Tutor::where('estado', 'on')->paginate(6);
         //echo var_dump($tutores);

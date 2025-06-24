@@ -7,6 +7,7 @@ use App\Models\Perfil_especialidade;
 use App\Models\Pf_especialidade_aluno;
 use App\Models\Solicitacao;
 use App\Models\Tutor;
+use App\Models\Tutor_especialidade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +25,10 @@ class TutorController extends Controller
         
         $id = Auth::id();
         $tutor = Tutor::where('id_user', $id)->first();
-        $especialidades = Especialidade::all();
+        //$especialidades = Especialidade::all();
+
+        $tutor_esp = Tutor_especialidade::with('tutor', 'especialidade')
+        ->where('id_tutor', $tutor['id'])->get();
 
         //pegar perfis de especialidades de um tutor
         $perfil_esps = Perfil_especialidade::with('especialidade', 'tutor')
@@ -32,7 +36,7 @@ class TutorController extends Controller
         ->where('id_tutor', $tutor['id'])     // filtra pelo tutor específico
         ->paginate(3);
         
-        return view('tutor/perfil', compact('tutor', 'especialidades', 'perfil_esps'));
+        return view('tutor/perfil', compact('tutor', 'tutor_esp', 'perfil_esps'));
     }
 
     public function home()

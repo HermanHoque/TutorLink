@@ -67,6 +67,7 @@
             </div>
         </div>
 
+        {{-- área para criar os perfis --}}
         <div class="col-md-6">
             <div class="card p-3" style="margin-top: 5px;">
                 <form method="post" action="{{ route('perfilSpecialty') }}">
@@ -75,8 +76,8 @@
                     <h5 class="card-title">Criar Perfil de Especialidades</h5>
                     <label class="form-label"><strong>Escolhe uma Especialidade*</strong></label>
                     <select class="form-select mb-3" name="id_especialidade">
-                        @foreach ($especialidades as $especialidade)
-                        <option value="{{$especialidade->id}}">{{$especialidade->nome}}</option>
+                        @foreach ($tutor_esp as $t_esp)
+                        <option value="{{$t_esp->especialidade->id}}">{{$t_esp->especialidade->nome}}</option>
                         @endforeach
                     </select>
 

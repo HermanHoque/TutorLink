@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
                 AlunoSeeder::class,
                 TutorSeeder::class,
                 EspecialidadeSeeder::class,
+                Tutor_especialidade::class
             ]
         );
     }
