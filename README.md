@@ -15,4 +15,7 @@ se você esta usando o programa Laragon o composer já vem instalado por padrão
 
 6- php artisan migrate (caso ainda não possue a base de dados no computador)
 
+(opcional) preencher a base de dados automaticamente com dados pré definidos
+7- php artisan db:seed
+
 caso esteja a usar o Xampp ou outro programa você deve instalar o composer primeiro e depois seguir os passos acima.
