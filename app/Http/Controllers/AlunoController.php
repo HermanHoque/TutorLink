@@ -7,6 +7,7 @@ use App\Models\Perfil_especialidade;
 use App\Models\Pf_especialidade_aluno;
 use App\Models\Solicitacao;
 use App\Models\Tutor;
+use App\Models\Tutor_especialidade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,9 +41,28 @@ class AlunoController extends Controller
     public function home()
     {
         
-        $tutores = Tutor::where('estado', 'on')->paginate(6);
-        //echo var_dump($tutores);
-        return view('aluno/home', compact('tutores'));
+        $tutor_esp = Tutor::with('especialidade')
+        ->where('estado', 'on')->paginate(6);
+
+        //echo var_dump($tutor_esp);
+        return view('aluno/home', compact('tutor_esp'));
+    }
+
+    /* metodo para pesquisar na  pagina home */
+    public function homeSearch(Request $request)
+    {
+        $search = $request->input('search'); // os valores da pesquisa
+        
+        $tutor_esp = Tutor::with('especialidade')
+        ->where('estado', 'on')
+        ->where(function ($query) use ($search) {
+            $query->where('nome_tutor', 'like', '%' . $search . '%')
+                  ->orWhereHas('especialidade', function ($q) use ($search) {
+                      $q->where('nome', 'like', '%' . $search . '%');
+                  });
+        })->paginate(6);
+
+        return view('aluno/home', compact('tutor_esp'));
     }
 
 

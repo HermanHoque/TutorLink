@@ -46,8 +46,9 @@ Route::middleware(['checkAuth'])->group(function () {
 });
 
 /* outras rotas do user Aluno*/
-Route::middleware(['checkAuth'])->group(function () {
-    Route::get('home_aluno', [AlunoController::class, 'home'])->name('alunoHome');
+Route::middleware(['checkAuth'])->group(function () { 
+    Route::get('home_aluno', [AlunoController::class, 'home'])->name('alunoHome'); 
+    Route::get('home_aluno', [AlunoController::class, 'homeSearch'])->name('alunoHomeSearch');
     Route::get('perfil_aluno', [AlunoController::class, 'perfil'])->name('alunoPerfil');
     Route::match(['post', 'get'],'detalhes/{uuid}', [AlunoController::class, 'detalhes'])->name('detalhes');
     Route::post('solicitar_aluna', [AlunoController::class, 'solicitacao'])->name('solicitacao');

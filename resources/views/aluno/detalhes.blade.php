@@ -10,6 +10,7 @@
     </div>
     <hr id="tracoHeader">   
   </div>
+
     @if ($msg = Session::get("notif"))
 
         <div class="alert alert-primary alert-dismissible fade show position-fixed top-0 end-0 m-3 z-3" role="alert">
@@ -34,8 +35,8 @@
   
     @endif
 
-
-  <div class="row">
+    <div class="container mt-4">
+        <div class="row">
       <div class="col-md-6">
           <div id="cardPerfil">
             <div class="sessao_perfil">
@@ -88,8 +89,8 @@
       </div>
 
 
-  </div>
- 
+        </div>
+    </div>
   <div class="container mt-4">
     <div class="row">
         <div class="col-md-6">

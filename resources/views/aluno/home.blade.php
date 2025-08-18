@@ -5,14 +5,15 @@
 
       <div id="cabecalho">
         <div class="row" id="title">
-            <div class="col" style="font-size: 20pt"> 
+            <div class="col" style="font-size: 20pt">  
                 <i class="bi bi-house"></i>
                 <strong>Home</strong>
             </div>
         </div>
         <hr id="tracoHeader">
         {{-- formulario de pesquisa --}}
-        <form action="" method="get">
+        <form action="{{ route('AlunoHomeSearch') }}" method="get">
+          @csrf
             <div class="input-group flex-nowrap">
 
                 <span class="input-group-text" id="buscaid" style="background: #3C4049; color: white;">
@@ -54,7 +55,7 @@
   <div class="container">
         
           <div class="row align-items-center">
-            @foreach ($tutores as $tutor)
+            @foreach ($tutor_esp as $t_esp)
             {{-- cards --}}
             <div class="col" style="padding-top: 20px">
               <div class="container">
@@ -62,15 +63,15 @@
                   <div id="card-body">
                     {{-- foto perfil e info --}}
                       <div class="d-flex align-items-center">
-                        @empty($tutor->foto_tutor)
+                        @empty($t_esp->foto_tutor)
                           <img src="{{ asset('img/student_5333052.png') }}" class="profile-pic" alt="Foto de perfil">
                         @else
                             <img src="{{ asset('img/23.jpg') }}" class="profile-pic" alt="Foto de perfil">
                         @endempty
                           <div>{{-- info tutor --}}
-                              <h5 class="mb-0">{{$tutor->nome_tutor}}</h5>
+                              <h5 class="mb-0">{{$t_esp->nome_tutor}}</h5>
                               <small class="text-muted">
-                                <i class="bi bi-geo-alt"> -</i> {{$tutor->endereco}}
+                                <i class="bi bi-geo-alt"> -</i> {{$t_esp->endereco}}
                               </small>
                           </div>
                       </div>
@@ -88,16 +89,20 @@
                       </div>
                       {{-- sobre o tutor --}}
                       <p>
-                        <strong>Especialidades:</strong> Inglês, Matemática, Física
+                        <strong>Especialidades:</strong> 
+                        @foreach ($t_esp->especialidade as $esp)
+                          <span class="badge" id="btnH1">{{$esp->nome}}</span>
+                        @endforeach
                       </p>
+
                       <p>
-                        <strong>Nivél Académico:</strong> {{$tutor->nivel_academico}}
+                        <strong>Nivél Académico:</strong> {{$t_esp->nivel_academico}}
                       </p>
-                      <p class="text-muted small">{{$tutor->descricao}}</p>
+                      <p class="text-muted small">{{$t_esp->descricao}}</p>
                   </div>
 
                       <div class="card-footer d-flex gap-2">
-                        <a href="{{ route('detalhes', $tutor->uuid_tutor) }}" class="btn w-50"  id="btnH1">
+                        <a href="{{ route('detalhes', $t_esp->uuid_tutor) }}" class="btn w-50"  id="btnH1">
                           Detalhes
                         </a>
                       <a href="#" class="btn btn-outline-secondary w-50">WhatsApp</a>
@@ -109,7 +114,7 @@
             @endforeach
         </div>
 
-        @include('aluno/home_pagination', ['paginator' => $tutores])
+        @include('aluno/home_pagination', ['paginator' => $tutor_esp])
         
   </div>
   

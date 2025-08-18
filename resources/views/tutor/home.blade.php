@@ -35,6 +35,7 @@
             </div>
         </div>
     </div>
+    </div>
 
     {{-- perfis de especialidades --}}
     <br>
@@ -49,6 +50,7 @@
             <hr id="tracoHeader">   
     </div>
 
+    <div class="container mt-5">
     <div class="row align-items-center">
 
         @empty($perfil_esps->count())

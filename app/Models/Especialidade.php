@@ -24,4 +24,9 @@ class Especialidade extends Model
         // um para muitos
         return $this->hasMany(Tutor_especialidade::class, 'id_especialidade', 'id');
     }
+
+    public function tutores()
+    {
+        return $this->belongsToMany(Tutor::class, 'tutor_especialidade', 'id_tutor', 'id_especialidade');
+    }
 }
