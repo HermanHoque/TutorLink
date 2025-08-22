@@ -52,17 +52,41 @@ class AlunoController extends Controller
     public function homeSearch(Request $request)
     {
         $search = $request->input('search'); // os valores da pesquisa
-        
-        $tutor_esp = Tutor::with('especialidade')
-        ->where('estado', 'on')
-        ->where(function ($query) use ($search) {
-            $query->where('nome_tutor', 'like', '%' . $search . '%')
-                  ->orWhereHas('especialidade', function ($q) use ($search) {
-                      $q->where('nome', 'like', '%' . $search . '%');
-                  });
-        })->paginate(6);
 
-        return view('aluno/home', compact('tutor_esp'));
+        $filtros = $request->input('filtros');  // array de filtros selecionados
+
+        if (empty($filtros)) {
+            // Se nenhum filtro for selecionado, considerar todos os filtros
+            $filtros = ['nome', 'endereco', 'especialidade'];
+        }
+
+        $tutor_esp = Tutor::with('especialidade')
+            ->where('estado', 'on')
+            ->when($search, function ($query, $search) use ($filtros) {
+                $query->where(function ($q) use ($search, $filtros) {
+                    
+                    // filtro por nome do tutor
+                    if (in_array('nome', $filtros)) {
+                        $q->orWhere('nome_tutor', 'LIKE', "%{$search}%");
+                    }
+
+                    // filtro por endereço do tutor
+                    if (in_array('endereco', $filtros)) {
+                        $q->orWhere('endereco', 'LIKE', "%{$search}%");
+                    }
+
+                    // filtro por especialidade
+                    if (in_array('especialidade', $filtros)) {
+                        $q->orWhereHas('especialidade', function ($q2) use ($search) {
+                            $q2->where('nome', 'LIKE', "%{$search}%");
+                        });
+                    }
+                });
+            })->paginate(6);
+
+        //echo var_dump($tutor_esp);
+
+        return view('aluno/home', compact('tutor_esp', 'search', 'filtros'));
     }
 
 
