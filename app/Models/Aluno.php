@@ -36,5 +36,10 @@ class Aluno extends Model
         // um para muitos
         return $this->hasMany(Pf_especialidade_aluno::class, 'id_aluno', 'id');
     }
+
+    public function perfil_especialidade()
+    {
+        return $this->belongsToMany(Perfil_especialidade::class, 'pf_especialidade_aluno', 'id_aluno', 'id_pf_especialidade');
+    }
     
 }

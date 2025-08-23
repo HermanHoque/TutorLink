@@ -21,8 +21,11 @@ class AlunoController extends Controller
         $id = Auth::id();
         $aluno = Aluno::where('id_user', $id)->first();
 
-        $solicitacoes = Solicitacao::with('tutor')
-        ->where('id_aluno', $aluno['id'])->where('resposta_tutor', 'em espera')->get();
+        $solicitacoes = Solicitacao::with('tutor.perfil_especialidade.especialidade')
+        ->where('id_aluno', $aluno['id'])
+        ->where('resposta_tutor', 'em espera')
+        ->orderBy('created_at', 'desc')
+        ->get();
 
         $perfil_esps = Pf_especialidade_aluno::with('aluno')
         ->with(['perfil_especialidade' => function ($query) {

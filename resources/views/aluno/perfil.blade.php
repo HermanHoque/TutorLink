@@ -13,6 +13,7 @@
 
 <div class="container mt-4">
     <div class="row">
+        <!-- card perfil -->
         <div class="col" style="margin-top: 5px;">
             <div id="cardPerfil">
                 <div class="info_user">
@@ -56,29 +57,46 @@
                 </div>
             </div>
         </div>
+        <!-- fim card perfil  -->
 
-
-        <div class="col" style="margin-top: 5px;">
-            <div id="cardPerfil">
-                <div class="info_user">
-                    <div class="d-flex align-items-center">
-                        <div>
-                            <h4>Solicitações em espera</h4>
-                        </div>
-                         <!-- Botão "ver solicitações" no lado direito -->
-                         <div class="ms-auto">
-                            <button class="btn btn-sm rounded-circle" style="background-color: #157347; color: white">
-                                <i class="bi bi-eye"></i>
-                            </button>
-                        </div>
+       <div class="col mt-2">
+            <div id="cardPerfil" class="card shadow-sm border-1">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="card-title mb-0">Solicitações em espera</h4>
+                        
+                        <!-- Botão "ver/ocultar solicitações" alinhado à direita -->
+                        <button id="toggleSolicitacoes" class="btn btn-sm rounded-circle ms-2" 
+                                style="background-color: #157347; color: white">
+                            <i id="iconEye" class="bi bi-eye"></i>
+                        </button>
                     </div>
                     <hr>
-                    <div class="text-center" style="font-size: 20pt;">
+                    
+                    <div class="text-center" style="font-size: 18pt;">
                         <strong><i class="bi bi-bell"></i> - {{$solicitacoes->count()}}</strong>
                     </div>
+
+                    <!-- lista de solicitações (com scroll e inicialmente oculta) -->
+                    <div id="listaSolicitacoes" class="solicitacoes mt-3">
+                        @foreach ($solicitacoes as $s)
+                            <div class="p-2 mb-2 border rounded bg-light text-start">
+                                Solicitação de aula de <strong>{{$s->perfil_especialidade->especialidade->nome}}</strong>
+                                para <strong>{{$s->tutor->nome_tutor}}</strong>
+                                <br>
+                                <span class="text-muted small">
+                                    <i class="bi bi-clock"></i> {{ $s->created_at->format('d/m/Y \à\s H:i') }}
+                                </span>
+                            </div>
+                        @endforeach
+                    </div>
+                    <!-- fim lista de solicitações -->
                 </div>
             </div>
         </div>
+        <!-- Fim Card Solicitações -->
+
+
     </div>
     <br>
         {{-- segundo cabeçalho --}}
@@ -92,6 +110,7 @@
                 <hr id="tracoHeader">   
         </div>
 
+        <!-- cards aulas -->
         <div class="row align-items-center">
             @empty($perfil_esps->count())
             
@@ -142,11 +161,34 @@
                     </div>
                 </div>
         </div>
+
         @endforeach
         @endempty
 
         @include('aluno/pagination', ['paginator' => $perfil_esps])
     </div>
+    <!-- fim cards aulas -->
+
+
+
+    <!-- JS toggle -->
+    <script>
+        document.getElementById("toggleSolicitacoes").addEventListener("click", function () {
+        const lista = document.getElementById("listaSolicitacoes");
+        const icon  = document.getElementById("iconEye");
+
+        lista.classList.toggle("show");
+
+        if (lista.classList.contains("show")) {
+            icon.classList.replace("bi-eye", "bi-eye-slash");
+        } else {
+            icon.classList.replace("bi-eye-slash", "bi-eye");
+        }
+        });
+
+    </script>
+
+
 
 
 @endsection

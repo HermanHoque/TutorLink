@@ -194,6 +194,21 @@ body {
         margin-top: 10px;
     }
 
+
+    :root { --altura-lista: 240px; }
+
+    .solicitacoes{
+        max-height: 0;     
+        overflow: hidden;  
+        opacity: 0;
+        transition: max-height .4s ease, opacity .25s ease;
+    }
+    .solicitacoes.show{
+        max-height: var(--altura-lista); 
+        overflow-y: auto;   
+        opacity: 1;
+    }
+
     
 /* responsividade */
 @media (min-width: 769px) {
