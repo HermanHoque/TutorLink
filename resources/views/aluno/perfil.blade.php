@@ -8,7 +8,18 @@
                 <strong>Perfil</strong>
             </div>
         </div>
-            <hr id="tracoHeader">   
+            <hr id="tracoHeader">
+            @if ($msg = Session::get("notif"))
+
+                <div class="alert alert-primary alert-dismissible fade show position-fixed top-0 end-0 m-3 z-3" role="alert">
+                    <strong>
+                        <i class="bi bi-check-square-fill"></i>
+                        {{$msg}}
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                
+            @endif
     </div>
 
 <div class="container mt-4">
@@ -19,9 +30,9 @@
                 <div class="info_user">
                     <div class="d-flex align-items-center">
                         @empty($aluno->foto_aluno){{-- foto --}}
-                            <img src="{{ asset('img/school_16658380.png') }}" alt="Foto de perfil" class="perfil_foto" style="width: 50px; height: 50px;">
+                            <img src="{{ asset('storage/fotosImgs/school_16658380.png') }}" data-bs-toggle="modal" data-bs-target="#modalFotoPerfil" alt="Foto de perfil" class="perfil_foto" style="width: 50px; height: 50px;">
                         @else
-                            <img src="{{ asset('img/23.jpg') }}" class="profile-pic" alt="Foto de perfil">
+                            <img src="{{ asset('storage/fotosImgs/' . $aluno->foto_aluno) }}" data-bs-toggle="modal" data-bs-target="#modalFotoPerfil" alt="Foto de perfil" class="perfil_foto" style="width: 50px; height: 50px;">
                         @endempty
                         <div>
                             <h4 style="margin: 0px;">{{$aluno['nome_aluno']}}</h4>
@@ -31,7 +42,7 @@
                         </div>
                          <!-- Botão "Editar perfil" no lado direito -->
                          <div class="ms-auto">
-                            <button class="btn btn-sm rounded-circle" style="background-color: #157347; color: white">
+                            <button class="btn btn-sm rounded-circle" data-bs-toggle="modal" data-bs-target="#editarPerfilModal" style="background-color: #157347; color: white">
                                 <i class="bi bi-pencil-square"></i>
                             </button>
                         </div>
@@ -49,7 +60,7 @@
                     </p>
                     <div class="estatos">
                         <div style="width: 200px;">
-                            <strong style="padding-left: 15px;">3</strong>
+                            <strong style="padding-left: 15px;">{{$perfil_esps->count()}}</strong>
                             <p>Aulas</p>
                         </div>
             
@@ -59,6 +70,7 @@
         </div>
         <!-- fim card perfil  -->
 
+        <!-- Card Solicitações -->
        <div class="col mt-2">
             <div id="cardPerfil" class="card shadow-sm border-1">
                 <div class="card-body">
@@ -76,19 +88,28 @@
                     <div class="text-center" style="font-size: 18pt;">
                         <strong><i class="bi bi-bell"></i> - {{$solicitacoes->count()}}</strong>
                     </div>
-
+                    
                     <!-- lista de solicitações (com scroll e inicialmente oculta) -->
                     <div id="listaSolicitacoes" class="solicitacoes mt-3">
-                        @foreach ($solicitacoes as $s)
-                            <div class="p-2 mb-2 border rounded bg-light text-start">
-                                Solicitação de aula de <strong>{{$s->perfil_especialidade->especialidade->nome}}</strong>
-                                para <strong>{{$s->tutor->nome_tutor}}</strong>
-                                <br>
-                                <span class="text-muted small">
-                                    <i class="bi bi-clock"></i> {{ $s->created_at->format('d/m/Y \à\s H:i') }}
-                                </span>
-                            </div>
-                        @endforeach
+                        @empty($solicitacoes->count())
+                        <div class="text-center">
+                            <img src="{{ asset('img/ask_11049522.png') }}" style="width: 100px; height: 100px;" alt="vazio"><br>
+                            <span><strong>Não há solicitações no momento!</strong></span>
+                        </div>
+                        
+                        @else
+                            @foreach ($solicitacoes as $s)
+
+                                <div class="p-2 mb-2 border rounded bg-light text-start">
+                                    Solicitação de aula de <strong>{{$s->perfil_especialidade->especialidade->nome}}</strong>
+                                    para <strong>{{$s->tutor->nome_tutor}}</strong>
+                                    <br>
+                                    <span class="text-muted small">
+                                        <i class="bi bi-clock"></i> {{ $s->created_at->format('d/m/Y \à\s H:i') }}
+                                    </span>
+                                </div>
+                            @endforeach
+                        @endempty
                     </div>
                     <!-- fim lista de solicitações -->
                 </div>
@@ -171,6 +192,113 @@
 
 
 
+    <!-- Modal editar perfil-->
+    <div class="modal fade" id="editarPerfilModal" tabindex="-1" aria-labelledby="editarPerfilModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-4 shadow">
+        <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="editarPerfilModalLabel">
+            <i class="bi bi-person-circle"></i> Editar Perfil
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <form action="{{ route('editPerfilAluno') }}" method="POST">
+            @csrf
+            <div class="modal-body">
+            
+            <!-- Nome -->
+            <div class="mb-3">
+                <label for="nome" class="form-label fw-bold">
+                <i class="bi bi-person"></i> Nome
+                </label>
+                <input type="text" class="form-control" id="nome" name="nome_aluno" value="{{ $aluno['nome_aluno'] }}" required>
+            </div>
+
+            <!-- Status (Aluno - não editável) -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">
+                <i class="bi bi-mortarboard"></i> Status
+                </label>
+                <input type="text" class="form-control" value="Aluno" disabled>
+            </div>
+
+            <!-- Telefone -->
+            <div class="mb-3">
+                <label for="telefone" class="form-label fw-bold">
+                <i class="bi bi-telephone"></i> Telefone
+                </label> 
+                <input type="text" class="form-control" id="telefone" name="telefone" value="{{$aluno['telefone_aluno']}}">
+            </div>
+
+            <!-- Curso -->
+            <div class="mb-3">
+                <label for="curso" class="form-label fw-bold">
+                <i class="bi bi-journal-bookmark"></i> Nível Acadêmico
+                </label>
+                <input type="text" class="form-control" id="curso" name="nivel_acad" value="{{$aluno['nivel_academico']}}">
+            </div>
+
+            <!-- Sobre você -->
+            <div class="mb-3">
+                <label for="sobre" class="form-label fw-bold">
+                <i class="bi bi-file-text"></i> Sobre você
+                </label>
+                <textarea class="form-control" id="sobre" name="descricao" rows="3">{{$aluno['descricao']}}</textarea>
+            </div>
+
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </button>
+            <button type="submit" class="btn" style="background-color: #157347; color: white;">
+                <i class="bi bi-save"></i> Salvar Alterações
+            </button>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+    <!-- Fim Modal editar perfil-->
+
+
+   <!-- Modal foto perfil -->
+    <div class="modal fade" id="modalFotoPerfil" tabindex="-1" aria-labelledby="modalFotoPerfilLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4">
+        <div class="modal-header bg-primary text-white rounded-top-4">
+            <h5 class="modal-title" id="modalFotoPerfilLabel">
+            <i class="bi bi-person-circle me-2"></i> Alterar Foto de Perfil
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+       <form action="{{ route('editFotoAluno') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-body text-center">
+                <!-- Preview -->
+                <img id="preview-foto" src="{{ asset('storage/fotosImgs/' . ($aluno->foto_aluno ?? 'school_16658380.png')) }}" 
+                    class="rounded-circle mb-3 shadow-sm" 
+                    style="width: 120px; height: 120px; object-fit: cover;">
+
+                <!-- Input -->
+                <div class="mb-3">
+                    <input class="form-control" type="file" id="foto" name="foto_aluno" accept="image/*" onchange="previewFoto(event)">
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-circle"></i> Salvar
+                </button>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+    <!-- Fim Modal foto perfil -->
+
+
+
     <!-- JS toggle -->
     <script>
         document.getElementById("toggleSolicitacoes").addEventListener("click", function () {
@@ -185,6 +313,13 @@
             icon.classList.replace("bi-eye-slash", "bi-eye");
         }
         });
+
+
+
+        function previewFoto(event) {
+        const img = document.getElementById('preview-foto');
+        img.src = URL.createObjectURL(event.target.files[0]);
+  }
 
     </script>
 

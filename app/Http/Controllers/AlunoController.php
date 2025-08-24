@@ -10,6 +10,8 @@ use App\Models\Tutor;
 use App\Models\Tutor_especialidade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class AlunoController extends Controller
 {
@@ -229,5 +231,51 @@ class AlunoController extends Controller
              }
              
          } 
+    }
+
+    //metodo para editar o perfil do aluno
+    public function editPerfilAluno(Request $rqt) {
+        $id = Auth::id();
+        $aluno = Aluno::where('id_user', $id)->first();
+
+        $aluno->nome_aluno = $rqt->input('nome_aluno');
+        $aluno->telefone_aluno = $rqt->input('telefone');
+        $aluno->nivel_academico = $rqt->input('nivel_acad');
+        $aluno->descricao = $rqt->input('descricao');
+
+        $aluno->save();
+
+        return redirect()->route('alunoPerfil')->with('notif', 'Perfil atualizado com sucesso!');
+        
+    }
+
+    //metodo para editar a foto do perfil do aluno
+    public function editFotoAluno(Request $rqt) {
+
+       $aluno = Aluno::where('id_user', Auth::id())->firstOrFail();
+
+        if (!$rqt->hasFile('foto_aluno')) {
+            return redirect()->route('alunoPerfil')
+                ->with('notif', 'Nenhuma foto foi selecionada.');
+        }
+
+        $foto = $rqt->file('foto_aluno');
+
+        // Gera nome único para a foto
+        $nomeFoto = uniqid() . '_' . preg_replace('/\s+/', '_', strtolower($foto->getClientOriginalName()));
+
+        // Armazena a foto na pasta configurada
+        $foto->storeAs('fotosImgs', $nomeFoto, 'public');
+
+        // Deleta a foto antiga, se não for a padrão
+        if ($aluno->foto_aluno && $aluno->foto_aluno !== 'school_16658380.png') {
+            Storage::disk('public')->delete('fotosImgs/' . $aluno->foto_aluno);
+        }
+
+        // Atualiza no banco
+        $aluno->update(['foto_aluno' => $nomeFoto]);
+
+        return redirect()->route('alunoPerfil')
+            ->with('notif', 'Foto de perfil atualizada com sucesso!');
     }
 }

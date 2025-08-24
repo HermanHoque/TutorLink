@@ -50,7 +50,9 @@ Route::middleware(['checkAuth'])->group(function () {
     Route::get('home_aluno', [AlunoController::class, 'home'])->name('alunoHome'); 
     Route::get('home_aluno_search', [AlunoController::class, 'homeSearch'])->name('alunoHomeSearch');
     Route::get('perfil_aluno', [AlunoController::class, 'perfil'])->name('alunoPerfil');
-    Route::match(['post', 'get'],'detalhes/{uuid}', [AlunoController::class, 'detalhes'])->name('detalhes');
+    Route::match(['post'],'EditarPerfil_aluno', [AlunoController::class, 'editPerfilAluno'])->name('editPerfilAluno');
+    Route::match(['post'],'EditarFoto_aluno', [AlunoController::class, 'editFotoAluno'])->name('editFotoAluno');
+    Route::match(['post', 'get'],'detalhes/{uuid}', [AlunoController::class, 'detalhes'])->name('detalhes'); 
     Route::post('solicitar_aluna', [AlunoController::class, 'solicitacao'])->name('solicitacao');
     Route::get('notificação_aluno', [AlunoController::class, 'notificacao'])->name('alunoNotifi');
     Route::get('notificaçãoLida_aluno', [AlunoController::class, 'notificacaoLida'])->name('alunoNotifiLida');
