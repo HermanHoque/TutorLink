@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlunoController;
+use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\EspecialidadeController;
 use App\Http\Controllers\TutorController;
 
@@ -52,8 +53,9 @@ Route::middleware(['checkAuth'])->group(function () {
     Route::get('perfil_aluno', [AlunoController::class, 'perfil'])->name('alunoPerfil');
     Route::match(['post'],'EditarPerfil_aluno', [AlunoController::class, 'editPerfilAluno'])->name('editPerfilAluno');
     Route::match(['post'],'EditarFoto_aluno', [AlunoController::class, 'editFotoAluno'])->name('editFotoAluno');
+    Route::post('salvarAvaliação_aluno', [AvaliacaoController::class, 'saveAvaliacao'])->name('saveAvaliacao');
     Route::match(['post', 'get'],'detalhes/{uuid}', [AlunoController::class, 'detalhes'])->name('detalhes'); 
-    Route::post('solicitar_aluna', [AlunoController::class, 'solicitacao'])->name('solicitacao');
+    Route::post('solicitar_aula', [AlunoController::class, 'solicitacao'])->name('solicitacao');
     Route::get('notificação_aluno', [AlunoController::class, 'notificacao'])->name('alunoNotifi');
     Route::get('notificaçãoLida_aluno', [AlunoController::class, 'notificacaoLida'])->name('alunoNotifiLida');
     Route::match(['post', 'delete'], 'confirm_notificação', [AlunoController::class, 'confirmNotifi'])->name('confirmNotifi');

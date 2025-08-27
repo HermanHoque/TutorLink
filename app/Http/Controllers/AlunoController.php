@@ -53,6 +53,7 @@ class AlunoController extends Controller
         return view('aluno/home', compact('tutor_esp'));
     }
 
+
     /* metodo para pesquisar na  pagina home */
     public function homeSearch(Request $request)
     {
@@ -95,6 +96,7 @@ class AlunoController extends Controller
     }
 
 
+    
     /* metodo para ver detalhes de um tutor */
     public function detalhes($uuid)
     {

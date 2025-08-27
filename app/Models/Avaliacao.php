@@ -8,7 +8,11 @@ class Avaliacao extends Model
 {
 
     protected $fillable =[
-        "nota",
+        "clareza",
+        "dominio",
+        "interatividade",
+        "organização",
+        "comentario",
         "id_tutor",
         "id_aluno"
     ];

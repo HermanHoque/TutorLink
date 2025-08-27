@@ -176,12 +176,110 @@
                         </div>
                     
                         <div class="card-footer d-flex gap-2">
-                            <a href="#" class="btn btn-outline-secondary w-50">Avaliar</a>
-                            <a href="#" class="btn btn-danger w-50">Terminar</a>
+                            <button class="btn btn-outline-secondary w-50" data-bs-toggle="modal" data-bs-target="#avaliacaoModal">
+                                Avaliar
+                            </button>
+                            <button class="btn btn-danger w-50">
+                                Terminar
+                            </button>
                         </div>
                     </div>
                 </div>
         </div>
+
+        <!-- Modal para avaliação -->
+        <div class="modal fade" id="avaliacaoModal" tabindex="-1" aria-labelledby="avaliacaoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 shadow-lg" style="max-width: 500px; margin:auto;">
+            <div class="modal-header bg-primary text-white rounded-top-4">
+                <h5 class="modal-title" id="modalFotoPerfilLabel">
+                <i class="bi bi-star-fill"></i> Avaliar Aula
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form action="{{ route('saveAvaliacao') }}" method="POST">
+                @csrf
+
+                <input type="hidden" name="id_tutor" value="{{$p_esp->perfil_especialidade->tutor->id}}">
+                <input type="hidden" name="id_aluno" value="{{$aluno->id}}">
+
+                <!-- Clareza -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Clareza da Explicação</label>
+                    <input type="range" class="form-range custom-range" min="0" max="10" step="1" 
+                            name="clareza" id="clareza"
+                            oninput="document.getElementById('clareza_val').innerText=this.value">
+                    <div class="d-flex justify-content-between">
+                        <small>0</small>
+                        <span class="badge bg-primary" id="clareza_val">5</span>
+                        <small>10</small>
+                    </div>
+                </div>
+
+                <!-- Domínio -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Domínio do Assunto</label>
+                    <input type="range" class="form-range custom-range" min="0" max="10" step="1" 
+                            name="dominio" id="dominio"
+                            oninput="document.getElementById('dominio_val').innerText=this.value">
+                    <div class="d-flex justify-content-between">
+                        <small>0</small>
+                        <span class="badge bg-success" id="dominio_val">5</span>
+                        <small>10</small>
+                    </div>
+                </div>
+
+                <!-- Interatividade -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Interatividade com o Aluno</label>
+                    <input type="range" class="form-range custom-range" min="0" max="10" step="1" 
+                            name="interatividade" id="interatividade"
+                            oninput="document.getElementById('interatividade_val').innerText=this.value">
+                    <div class="d-flex justify-content-between">
+                        <small>0</small>
+                        <span class="badge bg-warning text-dark" id="interatividade_val">5</span>
+                        <small>10</small>
+                    </div>
+                </div>
+
+                <!-- Organização -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Organização das Aulas</label>
+                    <input type="range" class="form-range custom-range" min="0" max="10" step="1" 
+                            name="organizacao" id="organizacao"
+                            oninput="document.getElementById('organizacao_val').innerText=this.value">
+                    <div class="d-flex justify-content-between">
+                        <small>0</small>
+                        <span class="badge bg-info" id="organizacao_val">5</span>
+                        <small>10</small>
+                    </div>
+                </div>
+
+                <!-- Comentário -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Comentário (opcional)</label>
+                    <textarea name="comentario" class="form-control rounded-3" rows="3"
+                                placeholder="Escreva sua opinião..."></textarea>
+                </div>
+
+                <!-- Botão -->
+                <div class="text-center">
+                    <button type="submit" class="btn px-4 py-2 rounded-pill shadow-sm" style="background-color: #157347; color: white;">
+                        <i class="bi bi-check-circle"></i> Enviar Avaliação
+                    </button>
+                </div>
+
+                </form>
+
+            </div>
+            </div>
+        </div>
+        </div>
+        <!-- Fim Modal avaliação -->
+
 
         @endforeach
         @endempty
@@ -287,8 +385,8 @@
             </div>
             <div class="modal-footer border-0">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-check-circle"></i> Salvar
+                <button type="submit" class="btn" style="background-color: #157347; color: white;">
+                    <i class="bi bi-save"></i> Salvar
                 </button>
             </div>
         </form>
@@ -296,6 +394,25 @@
     </div>
     </div>
     <!-- Fim Modal foto perfil -->
+
+
+
+
+<!-- CSS para os ticks nos sliders -->
+<style>
+.custom-range {
+    background: repeating-linear-gradient(
+        to right,
+        #ccc,
+        #ccc 1px,
+        transparent 1px,
+        transparent calc(100%/11)
+    );
+}
+</style>
+
+
+
 
 
 

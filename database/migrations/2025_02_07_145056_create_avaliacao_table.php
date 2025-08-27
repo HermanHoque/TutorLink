@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('avaliacao', function (Blueprint $table) {
             $table->id();
-            $table->float("nota", 10,2)->nullable(false);
+            $table->float("clareza", 10,2)->nullable(false);
+            $table->float("dominio", 10,2)->nullable(false);
+            $table->float("interatividade", 10,2)->nullable(false);
+            $table->float("organização", 10,2)->nullable(false);
+            $table->text("comentario")->nullable();
 
             $table->unsignedBigInteger("id_tutor");
             $table->foreign("id_tutor")->references("id")->on("tutor")->onDelete("cascade")->onUpdate("cascade");

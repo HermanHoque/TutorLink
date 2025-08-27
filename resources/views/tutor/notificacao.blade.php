@@ -41,9 +41,9 @@
             <div style="padding: 10px;">
                 <div class="d-flex align-items-center">
                     @empty($s->aluno->foto_aluno){{-- foto --}}
-                        <img src="{{ asset('img/school_16658380.png') }}" alt="Foto de perfil" class="perfil_foto" style="width: 50px; height: 50px;">
+                        <img src="{{ asset('storage/fotosImgs/school_16658380.png') }}" alt="Foto de perfil" class="perfil_foto" style="width: 50px; height: 50px;">
                     @else
-                        <img src="{{ asset('img/23.jpg') }}" class="profile-pic" alt="Foto de perfil">
+                        <img src="{{ asset('storage/fotosImgs/' . $s->aluno->foto_aluno) }}" class="profile-pic" alt="Foto de perfil">
                     @endempty
                     <div>
                         <h5 class="mb-0"><strong>Solicitação de {{$s->aluno->nome_aluno}}</strong></h5>
