@@ -46,8 +46,15 @@ class Tutor extends Model
         return $this->hasMany(Tutor_especialidade::class, 'id_especialidade', 'id');
     }
 
+    public function avaliacao()
+    {
+        // um para muitos
+        return $this->hasMany(Avaliacao::class, 'id_tutor', 'id');
+    }
+
     public function especialidade()
     {
         return $this->belongsToMany(Especialidade::class, 'tutor_especialidade', 'id_tutor', 'id_especialidade');
     }
+
 }

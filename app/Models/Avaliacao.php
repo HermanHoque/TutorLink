@@ -18,4 +18,10 @@ class Avaliacao extends Model
     ];
 
     protected $table = "avaliacao";
+
+    public function tutor()
+    {
+        // muitos para um
+        return $this->belongsTo(Tutor::class, 'id_tutor');
+    }
 }

@@ -47,6 +47,10 @@ class AlunoController extends Controller
     {
         
         $tutor_esp = Tutor::with('especialidade')
+        ->withAvg('avaliacao', 'clareza')
+        ->withAvg('avaliacao', 'dominio')
+        ->withAvg('avaliacao', 'interatividade')
+        ->withAvg('avaliacao', 'organização')
         ->where('estado', 'on')->paginate(6);
 
         //echo var_dump($tutor_esp);
@@ -237,47 +241,67 @@ class AlunoController extends Controller
 
     //metodo para editar o perfil do aluno
     public function editPerfilAluno(Request $rqt) {
-        $id = Auth::id();
-        $aluno = Aluno::where('id_user', $id)->first();
 
-        $aluno->nome_aluno = $rqt->input('nome_aluno');
-        $aluno->telefone_aluno = $rqt->input('telefone');
-        $aluno->nivel_academico = $rqt->input('nivel_acad');
-        $aluno->descricao = $rqt->input('descricao');
+        try {
+            $id = Auth::id();
+            $aluno = Aluno::where('id_user', $id)->first();
+    
+            $aluno->nome_aluno = $rqt->input('nome_aluno');
+            $aluno->telefone_aluno = $rqt->input('telefone');
+            $aluno->nivel_academico = $rqt->input('nivel_acad');
+            $aluno->descricao = $rqt->input('descricao');
+    
+            $aluno->save();
+    
+            return redirect()->route('alunoPerfil')->with('notif', 'Perfil atualizado com sucesso!');
 
-        $aluno->save();
-
-        return redirect()->route('alunoPerfil')->with('notif', 'Perfil atualizado com sucesso!');
+        } catch (\Throwable $th) {
+            return redirect()->route('alunoPerfil')->with('notif2', 'Ocorreu um erro ao atualizar o perfil. Tente novamente.');
+        }
         
     }
 
     //metodo para editar a foto do perfil do aluno
     public function editFotoAluno(Request $rqt) {
 
-       $aluno = Aluno::where('id_user', Auth::id())->firstOrFail();
+        try {
+            
+            $aluno = Aluno::where('id_user', Auth::id())->firstOrFail();
+    
+             /* validação da foto */
+             $rqt->validate([
+                'foto_aluno' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
+            ]);
 
-        if (!$rqt->hasFile('foto_aluno')) {
+            if (!$rqt->hasFile('foto_aluno')) {
+                return redirect()->route('alunoPerfil')
+                    ->with('notif2', 'Nenhuma foto foi selecionada.');
+            }
+
+            $foto = $rqt->file('foto_aluno');
+
+            // Gera nome único para a foto
+            $nomeFoto = uniqid() . '_' . preg_replace('/\s+/', '_', strtolower($foto->getClientOriginalName()));
+
+            // Armazena a foto na pasta configurada
+            $foto->storeAs('fotosImgs', $nomeFoto, 'public');
+
+            // Deleta a foto antiga, se não for a padrão
+            if ($aluno->foto_aluno && $aluno->foto_aluno !== 'school_16658380.png') {
+                Storage::disk('public')->delete('fotosImgs/' . $aluno->foto_aluno);
+            }
+
+            // Atualiza no banco
+            $aluno->update(['foto_aluno' => $nomeFoto]);
+
             return redirect()->route('alunoPerfil')
-                ->with('notif', 'Nenhuma foto foi selecionada.');
-        }
+                ->with('notif', 'Foto de perfil atualizada com sucesso!');
 
-        $foto = $rqt->file('foto_aluno');
+       } catch (\Throwable $th) {
+            return redirect()->route('alunoPerfil')
+            ->with('notif2', 'Ocorreu um erro ao atualizar a foto de perfil. Tente novamente.');   
+       }
 
-        // Gera nome único para a foto
-        $nomeFoto = uniqid() . '_' . preg_replace('/\s+/', '_', strtolower($foto->getClientOriginalName()));
-
-        // Armazena a foto na pasta configurada
-        $foto->storeAs('fotosImgs', $nomeFoto, 'public');
-
-        // Deleta a foto antiga, se não for a padrão
-        if ($aluno->foto_aluno && $aluno->foto_aluno !== 'school_16658380.png') {
-            Storage::disk('public')->delete('fotosImgs/' . $aluno->foto_aluno);
-        }
-
-        // Atualiza no banco
-        $aluno->update(['foto_aluno' => $nomeFoto]);
-
-        return redirect()->route('alunoPerfil')
-            ->with('notif', 'Foto de perfil atualizada com sucesso!');
+        
     }
 }

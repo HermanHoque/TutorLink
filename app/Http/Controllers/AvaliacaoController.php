@@ -20,18 +20,33 @@ class AvaliacaoController extends Controller
             'id_aluno' => 'required|exists:aluno,id',
         ]);
 
-        // Criação de uma nova avaliação
-        $avaliacao = new Avaliacao;
-        $avaliacao->clareza = $validatedData['clareza'];
-        $avaliacao->dominio = $validatedData['dominio'];
-        $avaliacao->interatividade = $validatedData['interatividade'];
-        $avaliacao->organização = $validatedData['organizacao'];
-        $avaliacao->comentario = $validatedData['comentario'] ?? null;
-        $avaliacao->id_tutor = $validatedData['id_tutor'];
-        $avaliacao->id_aluno = $validatedData['id_aluno'];
-        $avaliacao->save();
+        //consulta para verificar se o aluno ja avaliou o tutor
+        $existe = Avaliacao::where('id_tutor', $validatedData['id_tutor'])
+            ->where('id_aluno', $validatedData['id_aluno'])
+            ->first();
+        
+        
+        if ($existe) {
+            return redirect()->back()->with('notif2', 'Você já avaliou esta aula!');
 
-        return redirect()->back()->with('notif', 'Avaliação enviada com sucesso!');
+        }else {
+
+            // Criação de uma nova avaliação
+            $avaliacao = new Avaliacao;
+            $avaliacao->clareza = $validatedData['clareza'];
+            $avaliacao->dominio = $validatedData['dominio'];
+            $avaliacao->interatividade = $validatedData['interatividade'];
+            $avaliacao->organização = $validatedData['organizacao'];
+            $avaliacao->comentario = $validatedData['comentario'] ?? null;
+            $avaliacao->id_tutor = $validatedData['id_tutor'];
+            $avaliacao->id_aluno = $validatedData['id_aluno'];
+            $avaliacao->save();
+
+            return redirect()->back()->with('notif', 'Avaliação enviada com sucesso!');
+            
+        }
+
+        
         
     }
 }

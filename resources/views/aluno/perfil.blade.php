@@ -20,6 +20,18 @@
                 </div>
                 
             @endif
+
+              @if ($msg = Session::get("notif2"))
+
+                <div class="alert alert-danger alert-dismissible fade show position-fixed top-0 end-0 m-3 z-3" role="alert">
+                    <strong>
+                        <i class="bi bi-x-square-fill"></i>
+                        {{$msg}}
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                
+            @endif
     </div>
 
 <div class="container mt-4">
