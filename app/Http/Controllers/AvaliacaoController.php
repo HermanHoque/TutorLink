@@ -36,7 +36,7 @@ class AvaliacaoController extends Controller
             $avaliacao->clareza = $validatedData['clareza'];
             $avaliacao->dominio = $validatedData['dominio'];
             $avaliacao->interatividade = $validatedData['interatividade'];
-            $avaliacao->organização = $validatedData['organizacao'];
+            $avaliacao->organizacao = $validatedData['organizacao'];
             $avaliacao->comentario = $validatedData['comentario'] ?? null;
             $avaliacao->id_tutor = $validatedData['id_tutor'];
             $avaliacao->id_aluno = $validatedData['id_aluno'];

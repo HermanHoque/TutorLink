@@ -103,7 +103,6 @@
                             <h5 class="mb-0">{{$t_esp->nome_tutor}}</h5>
                             <small class="text-muted">
                               <i class="bi bi-geo-alt"> -</i> {{$t_esp->endereco}}
-                              {{number_format($t_esp->avaliacao_clareza_avg, 1)}}
                             </small>
                         </div>
                     </div>
@@ -113,17 +112,17 @@
                             <strong><i class="bi bi-star-fill text-warning"></i> 
                               {{
                                 number_format((
-                                  ($t_esp->avaliacao_clareza_avg) +
-                                  ($t_esp->avaliacao_dominio_avg) +
-                                  ($t_esp->avaliacao_interatividade_avg) +
-                                  ($t_esp->avaliacao_organização_avg)
+                                  ($t_esp->clareza_avg) +
+                                  ($t_esp->dominio_avg) +
+                                  ($t_esp->interatividade_avg) +
+                                  ($t_esp->organizacao_avg)
                                 ) / 4, 1)
                               }}/10
                             </strong>
                             <p class="text-muted small">nota média</p>
                         </div>
                         <div style="padding: 10px; text-align: center">
-                            <strong><i class="bi bi-graph-up"></i> 94</strong>
+                            <strong><i class="bi bi-graph-up"></i> {{number_format($t_esp->total_avaliacoes)}}</strong>
                             <p class="text-muted small">avaliações</p>
                         </div>
                         

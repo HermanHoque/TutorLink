@@ -47,13 +47,22 @@ class AlunoController extends Controller
     {
         
         $tutor_esp = Tutor::with('especialidade')
-        ->withAvg('avaliacao', 'clareza')
-        ->withAvg('avaliacao', 'dominio')
-        ->withAvg('avaliacao', 'interatividade')
-        ->withAvg('avaliacao', 'organização')
-        ->where('estado', 'on')->paginate(6);
+        ->withAvg('avaliacao as clareza_avg', 'clareza')
+        ->withAvg('avaliacao as dominio_avg', 'dominio')
+        ->withAvg('avaliacao as interatividade_avg', 'interatividade')
+        ->withAvg('avaliacao as organizacao_avg', 'organizacao')
+        ->withCount('avaliacao as total_avaliacoes')
+        ->where('estado', 'on')
+        ->paginate(6);
 
-        //echo var_dump($tutor_esp);
+        #echo var_dump($tutor_esp);
+        foreach ($tutor_esp as $v) {
+            $v->avaliacao_clareza_avg = round($v->avaliacao_clareza_avg, 1);
+            $v->avaliacao_dominio_avg = round($v->avaliacao_dominio_avg, 1);
+            $v->avaliacao_interatividade_avg = round($v->avaliacao_interatividade_avg, 1);
+            $v->avaliacao_organização_avg = round($v->avaliacao_organização_avg, 1);
+
+        }
         return view('aluno/home', compact('tutor_esp'));
     }
 
@@ -71,6 +80,11 @@ class AlunoController extends Controller
         }
 
         $tutor_esp = Tutor::with('especialidade')
+            ->withAvg('avaliacao as clareza_avg', 'clareza')
+            ->withAvg('avaliacao as dominio_avg', 'dominio')
+            ->withAvg('avaliacao as interatividade_avg', 'interatividade')
+            ->withAvg('avaliacao as organizacao_avg', 'organizacao')
+            ->withCount('avaliacao as total_avaliacoes')
             ->where('estado', 'on')
             ->when($search, function ($query, $search) use ($filtros) {
                 $query->where(function ($q) use ($search, $filtros) {
