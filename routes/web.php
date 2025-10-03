@@ -50,7 +50,8 @@ Route::middleware(['checkAuth'])->group(function () {
 Route::middleware(['checkAuth'])->group(function () { 
     Route::get('home_aluno', [AlunoController::class, 'home'])->name('alunoHome'); 
     Route::get('home_aluno_search', [AlunoController::class, 'homeSearch'])->name('alunoHomeSearch');
-    Route::get('perfil_aluno', [AlunoController::class, 'perfil'])->name('alunoPerfil');
+    Route::get('home_aluno_Top', [AlunoController::class, 'homeTop'])->name('alunoHomeTop'); 
+    Route::get('perfil_aluno', [AlunoController::class, 'perfil'])->name('alunoPerfil'); 
     Route::match(['post'],'EditarPerfil_aluno', [AlunoController::class, 'editPerfilAluno'])->name('editPerfilAluno');
     Route::match(['post'],'EditarFoto_aluno', [AlunoController::class, 'editFotoAluno'])->name('editFotoAluno');
     Route::post('salvarAvaliação_aluno', [AvaliacaoController::class, 'saveAvaliacao'])->name('saveAvaliacao');

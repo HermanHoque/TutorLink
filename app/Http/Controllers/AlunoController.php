@@ -55,15 +55,10 @@ class AlunoController extends Controller
         ->where('estado', 'on')
         ->paginate(6);
 
+        $all = true;
         #echo var_dump($tutor_esp);
-        foreach ($tutor_esp as $v) {
-            $v->avaliacao_clareza_avg = round($v->avaliacao_clareza_avg, 1);
-            $v->avaliacao_dominio_avg = round($v->avaliacao_dominio_avg, 1);
-            $v->avaliacao_interatividade_avg = round($v->avaliacao_interatividade_avg, 1);
-            $v->avaliacao_organização_avg = round($v->avaliacao_organização_avg, 1);
-
-        }
-        return view('aluno/home', compact('tutor_esp'));
+       
+        return view('aluno/home', compact('tutor_esp', 'all'));
     }
 
 
@@ -86,31 +81,56 @@ class AlunoController extends Controller
             ->withAvg('avaliacao as organizacao_avg', 'organizacao')
             ->withCount('avaliacao as total_avaliacoes')
             ->where('estado', 'on')
-            ->when($search, function ($query, $search) use ($filtros) {
+            ->when($search, function ($query) use ($search, $filtros) {
                 $query->where(function ($q) use ($search, $filtros) {
-                    
-                    // filtro por nome do tutor
-                    if (in_array('nome', $filtros)) {
-                        $q->orWhere('nome_tutor', 'LIKE', "%{$search}%");
-                    }
-
-                    // filtro por endereço do tutor
-                    if (in_array('endereco', $filtros)) {
-                        $q->orWhere('endereco', 'LIKE', "%{$search}%");
-                    }
-
-                    // filtro por especialidade
-                    if (in_array('especialidade', $filtros)) {
-                        $q->orWhereHas('especialidade', function ($q2) use ($search) {
-                            $q2->where('nome', 'LIKE', "%{$search}%");
-                        });
+                    foreach ($filtros as $filtro) {
+                        switch ($filtro) {
+                            case 'nome':
+                                $q->orWhere('nome_tutor', 'LIKE', "%{$search}%");
+                                break;
+                            case 'endereco':
+                                $q->orWhere('endereco', 'LIKE', "%{$search}%");
+                                break;
+                            case 'especialidade':
+                                $q->orWhereHas('especialidade', function ($q2) use ($search) {
+                                    $q2->where('nome', 'LIKE', "%{$search}%");
+                                });
+                                break;
+                        }
                     }
                 });
-            })->paginate(6);
+            })
+            ->paginate(6);
+
 
         //echo var_dump($tutor_esp);
 
         return view('aluno/home', compact('tutor_esp', 'search', 'filtros'));
+    }
+
+
+    # metodo para top avaliações
+    public function homeTop()
+    {
+        
+        $tutor_esp = Tutor::with('especialidade')
+        ->join('avaliacao', 'tutor.id', '=', 'avaliacao.id_tutor')
+        ->selectRaw('tutor.*,
+            AVG(avaliacao.clareza) as clareza_avg,
+            AVG(avaliacao.dominio) as dominio_avg,
+            AVG(avaliacao.interatividade) as interatividade_avg,
+            AVG(avaliacao.organizacao) as organizacao_avg,
+            COUNT(avaliacao.id) as total_avaliacoes,
+            (AVG(avaliacao.clareza) + AVG(avaliacao.dominio) + AVG(avaliacao.interatividade) + AVG(avaliacao.organizacao)) / 4 as media_final')
+        ->where('estado', 'on')
+        ->groupBy('tutor.id')
+        ->orderBy('media_final', 'DESC')
+        ->paginate(6);
+
+        $top = true; //indicador de que é a pagina top
+        #echo var_dump($tutor_esp);
+       
+        return view('aluno/home', compact('tutor_esp', 'top'));
     }
 
 

@@ -60,16 +60,17 @@
         <div style="margin-top: 20px;">
           <ul class="nav nav-tabs" id="navTabs">
             <li class="nav-item">
-              <a class="nav-link active" href="#" style="color: #3C4049">All</a>
+              <a class="nav-link active" href="{{ route('alunoHome') }}" style="color: #3C4049">All</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" style="color: #3C4049">Top Avaliações</a>
+              <a class="nav-link" href="{{ route('alunoHomeTop') }}" style="color: #3C4049">Top Avaliações</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" style="color: #3C4049">Destaques</a>
             </li>
           </ul>
         </div>
+        {{-- fim das abas de navegação --}}
 
       </div>
 
@@ -109,7 +110,11 @@
                     {{-- medias e avaliações --}}
                     <div class="d-flex mt-3">
                         <div style="padding: 10px;">
-                            <strong><i class="bi bi-star-fill text-warning"></i> 
+                            <strong><i class="bi bi-star-fill text-warning"></i>
+                              @if (isset($top))
+                                {{-- se for a pagina top --}}
+                                {{number_format(($t_esp->media_final), 1)}}
+                              @else
                               {{
                                 number_format((
                                   ($t_esp->clareza_avg) +
@@ -117,7 +122,9 @@
                                   ($t_esp->interatividade_avg) +
                                   ($t_esp->organizacao_avg)
                                 ) / 4, 1)
-                              }}/10
+                              }}
+                              @endif 
+                              / 10
                             </strong>
                             <p class="text-muted small">nota média</p>
                         </div>
