@@ -27,11 +27,15 @@ caso esteja a usar o Xampp ou outro programa você deve instalar o composer prim
 # Criar uma nova migration
 php artisan make:migration create_users_table
 
+# Criar migration para adicionar coluna em uma tabela
+php artisan make:migration add_idade_to_users_table --table=users
+
 # Criar migration com --create (nova tabela)
 php artisan make:migration create_products_table --create=products
 
 # Criar migration com --table (alterar tabela existente)
 php artisan make:migration add_email_to_users_table --table=users
+
 
 # Executar todas as migrations pendentes
 php artisan migrate
@@ -58,4 +62,4 @@ php artisan migrate:fresh --seed
 php artisan migrate:status
 
 # Rodar seeders
-php artisan db seed
+php artisan db:seed
