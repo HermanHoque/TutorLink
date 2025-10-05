@@ -62,7 +62,48 @@ class AlunoController extends Controller
     }
 
 
-    /* metodo para pesquisar na  pagina home */
+   # metodo para top avaliações
+    public function homeTop()
+    {
+        
+        $tutor_esp = Tutor::with('especialidade')
+        ->join('avaliacao', 'tutor.id', '=', 'avaliacao.id_tutor')
+        ->selectRaw('tutor.*,
+            AVG(avaliacao.clareza) as clareza_avg,
+            AVG(avaliacao.dominio) as dominio_avg,
+            AVG(avaliacao.interatividade) as interatividade_avg,
+            AVG(avaliacao.organizacao) as organizacao_avg,
+            COUNT(avaliacao.id) as total_avaliacoes,
+            (AVG(avaliacao.clareza) + AVG(avaliacao.dominio) + AVG(avaliacao.interatividade) + AVG(avaliacao.organizacao)) / 4 as media_final')
+        ->where('estado', 'on')
+        ->groupBy('tutor.id')
+        ->orderBy('media_final', 'DESC')
+        ->paginate(6);
+
+        $top = true; //indicador de que é a pagina top
+        #echo var_dump($tutor_esp);
+       
+        return view('aluno/home', compact('tutor_esp', 'top'));
+    }
+
+
+    # metodo para tutores em destaque
+    public function homeDestaques()
+    {
+        
+        $tutor_esp = Tutor::with('especialidade')
+        ->where('estado', 'on')
+        ->where('destaque', 'on')
+        ->paginate(6);
+
+        $destaque = true; //indicador de que é a pagina destaque
+        #echo var_dump($tutor_esp);
+       
+        return view('aluno/home', compact('tutor_esp', 'destaque'));
+    }
+
+
+     /* metodo para pesquisar na  pagina home */
     public function homeSearch(Request $request)
     {
         $search = $request->input('search'); // os valores da pesquisa
@@ -107,32 +148,6 @@ class AlunoController extends Controller
 
         return view('aluno/home', compact('tutor_esp', 'search', 'filtros'));
     }
-
-
-    # metodo para top avaliações
-    public function homeTop()
-    {
-        
-        $tutor_esp = Tutor::with('especialidade')
-        ->join('avaliacao', 'tutor.id', '=', 'avaliacao.id_tutor')
-        ->selectRaw('tutor.*,
-            AVG(avaliacao.clareza) as clareza_avg,
-            AVG(avaliacao.dominio) as dominio_avg,
-            AVG(avaliacao.interatividade) as interatividade_avg,
-            AVG(avaliacao.organizacao) as organizacao_avg,
-            COUNT(avaliacao.id) as total_avaliacoes,
-            (AVG(avaliacao.clareza) + AVG(avaliacao.dominio) + AVG(avaliacao.interatividade) + AVG(avaliacao.organizacao)) / 4 as media_final')
-        ->where('estado', 'on')
-        ->groupBy('tutor.id')
-        ->orderBy('media_final', 'DESC')
-        ->paginate(6);
-
-        $top = true; //indicador de que é a pagina top
-        #echo var_dump($tutor_esp);
-       
-        return view('aluno/home', compact('tutor_esp', 'top'));
-    }
-
 
     
     /* metodo para ver detalhes de um tutor */

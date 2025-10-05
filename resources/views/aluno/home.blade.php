@@ -66,7 +66,7 @@
               <a class="nav-link" href="{{ route('alunoHomeTop') }}" style="color: #3C4049">Top Avaliações</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" style="color: #3C4049">Destaques</a>
+              <a class="nav-link" href="{{ route('alunoHomeDestaques') }}" style="color: #3C4049">Destaques</a>
             </li>
           </ul>
         </div>
