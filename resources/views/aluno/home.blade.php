@@ -103,7 +103,11 @@
                         <div>{{-- info tutor --}}
                             <h5 class="mb-0">{{$t_esp->nome_tutor}}</h5>
                             <small class="text-muted">
-                              <i class="bi bi-geo-alt"> -</i> {{$t_esp->endereco}}
+                              <i class="bi bi-geo-alt"> -</i> {{$t_esp->endereco}}<br>
+                              
+                              @if ($t_esp->destaque == 'on')
+                                <i class="bi bi-award"> -</i> Tutor em destaque
+                              @endif
                             </small>
                         </div>
                     </div>
@@ -128,6 +132,7 @@
                             </strong>
                             <p class="text-muted small">nota média</p>
                         </div>
+
                         <div style="padding: 10px; text-align: center">
                             <strong><i class="bi bi-graph-up"></i> {{number_format($t_esp->total_avaliacoes)}}</strong>
                             <p class="text-muted small">avaliações</p>

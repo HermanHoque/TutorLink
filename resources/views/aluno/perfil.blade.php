@@ -188,7 +188,7 @@
                         </div>
                     
                         <div class="card-footer d-flex gap-2">
-                            <button class="btn btn-outline-secondary w-50" data-bs-toggle="modal" data-bs-target="#avaliacaoModal">
+                            <button class="btn btn-outline-secondary w-50" data-bs-toggle="modal" data-bs-target="#avaliacaoModal{{$loop->iteration}}">
                                 Avaliar
                             </button>
                             <button class="btn btn-danger w-50">
@@ -200,7 +200,7 @@
         </div>
 
         <!-- Modal para avaliação -->
-        <div class="modal fade" id="avaliacaoModal" tabindex="-1" aria-labelledby="avaliacaoModalLabel" aria-hidden="true">
+        <div class="modal fade" id="avaliacaoModal{{$loop->iteration}}" tabindex="-1" aria-labelledby="avaliacaoModalLabel{{$loop->iteration}}" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 shadow-lg" style="max-width: 500px; margin:auto;">
             <div class="modal-header bg-primary text-white rounded-top-4">
@@ -223,10 +223,10 @@
                     <label class="form-label fw-bold">Clareza da Explicação</label>
                     <input type="range" class="form-range custom-range" min="0" max="10" step="1" 
                             name="clareza" id="clareza"
-                            oninput="document.getElementById('clareza_val').innerText=this.value">
+                            oninput="document.getElementById('clareza_val{{$loop->iteration}}').innerText=this.value">
                     <div class="d-flex justify-content-between">
                         <small>0</small>
-                        <span class="badge bg-primary" id="clareza_val">5</span>
+                        <span class="badge bg-primary" id="clareza_val{{$loop->iteration}}">5</span>
                         <small>10</small>
                     </div>
                 </div>
@@ -236,10 +236,10 @@
                     <label class="form-label fw-bold">Domínio do Assunto</label>
                     <input type="range" class="form-range custom-range" min="0" max="10" step="1" 
                             name="dominio" id="dominio"
-                            oninput="document.getElementById('dominio_val').innerText=this.value">
+                            oninput="document.getElementById('dominio_val{{$loop->iteration}}').innerText=this.value">
                     <div class="d-flex justify-content-between">
                         <small>0</small>
-                        <span class="badge bg-success" id="dominio_val">5</span>
+                        <span class="badge bg-success" id="dominio_val{{$loop->iteration}}">5</span>
                         <small>10</small>
                     </div>
                 </div>
@@ -249,10 +249,10 @@
                     <label class="form-label fw-bold">Interatividade com o Aluno</label>
                     <input type="range" class="form-range custom-range" min="0" max="10" step="1" 
                             name="interatividade" id="interatividade"
-                            oninput="document.getElementById('interatividade_val').innerText=this.value">
+                            oninput="document.getElementById('interatividade_val{{$loop->iteration}}').innerText=this.value">
                     <div class="d-flex justify-content-between">
                         <small>0</small>
-                        <span class="badge bg-warning text-dark" id="interatividade_val">5</span>
+                        <span class="badge bg-warning text-dark" id="interatividade_val{{$loop->iteration}}">5</span>
                         <small>10</small>
                     </div>
                 </div>
@@ -262,10 +262,10 @@
                     <label class="form-label fw-bold">Organização das Aulas</label>
                     <input type="range" class="form-range custom-range" min="0" max="10" step="1" 
                             name="organizacao" id="organizacao"
-                            oninput="document.getElementById('organizacao_val').innerText=this.value">
+                            oninput="document.getElementById('organizacao_val{{$loop->iteration}}').innerText=this.value">
                     <div class="d-flex justify-content-between">
                         <small>0</small>
-                        <span class="badge bg-info" id="organizacao_val">5</span>
+                        <span class="badge bg-info" id="organizacao_val{{$loop->iteration}}">5</span>
                         <small>10</small>
                     </div>
                 </div>

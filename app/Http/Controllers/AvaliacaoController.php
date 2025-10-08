@@ -15,14 +15,12 @@ class AvaliacaoController extends Controller
             'dominio' => 'required|numeric|min:0|max:10',
             'interatividade' => 'required|numeric|min:0|max:10',
             'organizacao' => 'required|numeric|min:0|max:10',
-            'comentario' => 'nullable|string|max:1000',
-            'id_tutor' => 'required|exists:tutor,id',
-            'id_aluno' => 'required|exists:aluno,id',
+            'comentario' => 'nullable|string|max:1000'
         ]);
 
         //consulta para verificar se o aluno ja avaliou o tutor
-        $existe = Avaliacao::where('id_tutor', $validatedData['id_tutor'])
-            ->where('id_aluno', $validatedData['id_aluno'])
+        $existe = Avaliacao::where('id_tutor', $request['id_tutor'])
+            ->where('id_aluno', $request['id_aluno'])
             ->first();
         
         
@@ -38,8 +36,8 @@ class AvaliacaoController extends Controller
             $avaliacao->interatividade = $validatedData['interatividade'];
             $avaliacao->organizacao = $validatedData['organizacao'];
             $avaliacao->comentario = $validatedData['comentario'] ?? null;
-            $avaliacao->id_tutor = $validatedData['id_tutor'];
-            $avaliacao->id_aluno = $validatedData['id_aluno'];
+            $avaliacao->id_tutor = $request['id_tutor'];
+            $avaliacao->id_aluno = $request['id_aluno'];
             $avaliacao->save();
 
             return redirect()->back()->with('notif', 'Avaliação enviada com sucesso!');
