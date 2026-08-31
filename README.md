@@ -1,4 +1,7 @@
-TutorLink
+# Prototipo - TutorLink
+Esta app é uma plataforma de ensino colaborativo, onde qualquer pessoa pode aprender e partilhar aquilo que sabe na 
+plataforma. É focada na comunidade.
+-----------------------------------
 
 para rodar o projeto deve instalar o composer no terminal,
 se você esta usando o programa Laragon o composer já vem instalado por padrão então é só abrir o terminal do Laragon e digitar os seguintes comandos:
