@@ -1,4 +1,4 @@
-# Prototipo - TutorLink
+# Protótipo - TutorLink
 Esta app é uma plataforma de ensino colaborativo, onde qualquer pessoa pode aprender e partilhar aquilo que sabe na 
 plataforma. É focada na comunidade.
 -----------------------------------
